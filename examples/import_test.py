@@ -1,4 +1,4 @@
-from greeter import Greeter
+from greeter_test import Greeter
 
 buddy = Greeter('buddy')
 
