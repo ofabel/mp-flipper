@@ -9,8 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* support external imports
 * `time` module support
 * `random` module support
+* basic `flipperzero` module
 * some test python scripts
 
 ## [0.1.0-alpha.1] - 2024-04-01
