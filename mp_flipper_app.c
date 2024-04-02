@@ -4,12 +4,15 @@
 
 #include <port/micropython_embed.h>
 
-static void load_python_file(FuriString* code) {
+#include "state.h"
+
+const char* root_module_path;
+
+static void load_python_file(FuriString* file_path, FuriString* code) {
     Storage* storage = furi_record_open(RECORD_STORAGE);
     DialogsApp* dialogs = furi_record_open(RECORD_DIALOGS);
 
     File* file = storage_file_alloc(storage);
-    FuriString* file_path = furi_string_alloc();
     DialogsFileBrowserOptions browser_options;
 
     dialog_file_browser_set_basic_options(&browser_options, "py", NULL);
@@ -44,7 +47,6 @@ static void load_python_file(FuriString* code) {
 
     storage_file_free(file);
     furi_record_close(RECORD_STORAGE);
-    furi_string_free(file_path);
 }
 
 int32_t mp_flipper_app(void* p) {
@@ -54,13 +56,24 @@ int32_t mp_flipper_app(void* p) {
     const size_t stack_size = 2 * 1024;
     uint8_t* memory = malloc(memory_size * sizeof(uint8_t));
 
+    FuriString* file_path = furi_string_alloc();
     FuriString* code = furi_string_alloc();
-    load_python_file(code);
+
+    load_python_file(file_path, code);
+
+    size_t index = furi_string_search_rchar(file_path, '/');
+
+    furi_check(index != FURI_STRING_FAILURE);
+
+    furi_string_left(file_path, index);
+
+    root_module_path = furi_string_get_cstr(file_path);
 
     mp_embed_init(memory + stack_size, memory_size - stack_size, memory);
     mp_embed_exec_str(furi_string_get_cstr(code));
     mp_embed_deinit();
 
+    furi_string_free(file_path);
     furi_string_free(code);
     free(memory);
 
