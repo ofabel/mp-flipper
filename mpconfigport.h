@@ -15,7 +15,7 @@ typedef long mp_off_t;
 
 #define MICROPY_MPHALPORT_H "lib/micropython-port/mphalport.h"
 
-#define MICROPY_CONFIG_ROM_LEVEL (MICROPY_CONFIG_ROM_LEVEL_MINIMUM)
+#define MICROPY_CONFIG_ROM_LEVEL (MICROPY_CONFIG_ROM_LEVEL_BASIC_FEATURES)
 
 #define MICROPY_ENABLE_COMPILER (1)
 #define MICROPY_ENABLE_GC (1)
@@ -28,3 +28,6 @@ typedef long mp_off_t;
 
 #define MICROPY_ENABLE_EXTERNAL_IMPORT (1)
 #define MICROPY_READER_VFS (1)
+
+#define MICROPY_PY_TIME (1)
+#define MICROPY_PY_TIME_TIME_TIME_NS (1)

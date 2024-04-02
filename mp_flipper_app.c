@@ -56,6 +56,9 @@ int32_t mp_flipper_app(void* p) {
     const size_t stack_size = 2 * 1024;
     uint8_t* memory = malloc(memory_size * sizeof(uint8_t));
 
+    FURI_LOG_I(TAG, "allocated memory is %zu bytes", memory_size);
+    FURI_LOG_I(TAG, "stack size is %zu bytes", stack_size);
+
     FuriString* file_path = furi_string_alloc();
     FuriString* code = furi_string_alloc();
 
