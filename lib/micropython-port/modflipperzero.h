@@ -18,3 +18,6 @@ void mp_flipper_vibro(bool state);
 bool mp_flipper_speaker_start(float frequency, float volume);
 bool mp_flipper_speaker_set_volume(float volume);
 bool mp_flipper_speaker_stop();
+
+void mp_flipper_canvas_draw_dot(uint8_t x, uint8_t y, bool color);
+void mp_flipper_canvas_update();

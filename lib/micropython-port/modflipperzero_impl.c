@@ -1,4 +1,8 @@
+#include <stdint.h>
+
 #include <furi_hal.h>
+
+#include <mp_flipper_app.h>
 
 #include "modflipperzero.h"
 
@@ -68,4 +72,15 @@ inline bool mp_flipper_speaker_stop() {
     }
 
     return false;
+}
+
+inline void mp_flipper_canvas_draw_dot(uint8_t x, uint8_t y, bool color) {
+    size_t index = (x + 1) / SCREEN_PIXEL_PER_ITEM + y * (SCREEN_WIDTH / SCREEN_PIXEL_PER_ITEM);
+    const uint32_t mask = 1 << (x % SCREEN_PIXEL_PER_ITEM);
+
+    mp_flipper_canvas[index] |= color ? (UINT32_MAX & mask) : 0;
+}
+
+inline void mp_flipper_canvas_update() {
+    view_port_update(mp_flipper_view_port);
 }
