@@ -7,20 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0-alpha.1] - 2024-04-03
+
 ### Added
 
-* support external imports
-* `time` module support
-* `random` module support
-* basic `flipperzero` module
-* some test python scripts
+* Support for external imports
+* Python `time` module support
+* Python `random` module support
+* Basic `flipperzero` module with support for:
+  * Vibration
+  * LED
+  * Backlight
+* Some test Python scripts
 
 ## [0.1.0-alpha.1] - 2024-04-01
 
 ### Added
 
-* basic build setup
-* minimal working example
+* Basic build setup
+* Minimal working example
 
-[unreleased]: https://github.com/ofabel/mp-flipper/compare/v0.1.0-alpha.1...HEAD
+[Unreleased]: https://github.com/ofabel/mp-flipper/compare/v0.2.0-alpha.1...HEAD
+[0.2.0-alpha.1]: https://github.com/ofabel/mp-flipper/releases/tag/v0.2.0-alpha.1
 [0.1.0-alpha.1]: https://github.com/ofabel/mp-flipper/releases/tag/v0.1.0-alpha.1
