@@ -14,3 +14,7 @@ void mp_flipper_light_blink_set_color(uint8_t raw_light);
 void mp_flipper_light_blink_stop();
 
 void mp_flipper_vibro(bool state);
+
+bool mp_flipper_speaker_start(float frequency, float volume);
+bool mp_flipper_speaker_set_volume(float volume);
+bool mp_flipper_speaker_stop();

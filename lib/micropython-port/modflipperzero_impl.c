@@ -1,8 +1,6 @@
-#include <stdbool.h>
-
 #include <furi_hal.h>
 
-#include "_modflipperzero.h"
+#include "modflipperzero.h"
 
 static Light decode_light(uint8_t value) {
     Light light = 0;
@@ -39,4 +37,35 @@ inline void mp_flipper_light_blink_stop() {
 
 inline void mp_flipper_vibro(bool state) {
     furi_hal_vibro_on(state);
+}
+
+inline bool mp_flipper_speaker_start(float frequency, float volume) {
+    if(furi_hal_speaker_acquire(100)) {
+        furi_hal_speaker_start(frequency, volume);
+
+        return true;
+    }
+
+    return false;
+}
+
+inline bool mp_flipper_speaker_set_volume(float volume) {
+    if(furi_hal_speaker_is_mine()) {
+        furi_hal_speaker_set_volume(volume);
+
+        return true;
+    }
+    return false;
+}
+
+inline bool mp_flipper_speaker_stop() {
+    if(furi_hal_speaker_is_mine()) {
+        furi_hal_speaker_stop();
+
+        furi_hal_speaker_release();
+
+        return true;
+    }
+
+    return false;
 }

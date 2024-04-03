@@ -6,7 +6,7 @@
 #include <py/mphal.h>
 #include <py/builtin.h>
 
-#include "state.h"
+#include <mp_flipper_app.h>
 
 const mp_obj_fun_builtin_var_t mp_builtin_open_obj;
 

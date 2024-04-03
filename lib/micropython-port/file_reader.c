@@ -5,7 +5,7 @@
 
 #include <py/reader.h>
 
-#include "state.h"
+#include <mp_flipper_app.h>
 
 typedef struct {
     size_t pointer;

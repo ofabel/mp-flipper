@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Floating point support
+* Basic speaker support for `flipperzero` module
+
 ## [0.2.0-alpha.1] - 2024-04-03
 
 ### Added

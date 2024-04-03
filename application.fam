@@ -22,7 +22,16 @@ App(
             name="micropython-build",
             cflags=[
                 "-Wno-error",
-                "-w"
+                "-w",
+                #
+                # required for floating point support
+                #
+                "-mcpu=cortex-m4",
+                "-mfloat-abi=hard",
+                "-mfpu=fpv4-sp-d16",
+                "-mthumb",
+                "-fsingle-precision-constant",
+                "-fno-math-errno",
             ],
             cincludes=["."]
         ),
@@ -30,7 +39,16 @@ App(
             name="micropython-port",
             cflags=[
                 "-Wno-error",
-                "-w"
+                "-w",
+                #
+                # required for floating point support
+                #
+                "-mcpu=cortex-m4",
+                "-mfloat-abi=hard",
+                "-mfpu=fpv4-sp-d16",
+                "-mthumb",
+                "-fsingle-precision-constant",
+                "-fno-math-errno",
             ],
             cincludes=["."]
         ),

@@ -4,7 +4,7 @@
 
 #include <port/micropython_embed.h>
 
-#include "state.h"
+#include "mp_flipper_app.h"
 
 const char* root_module_path;
 
