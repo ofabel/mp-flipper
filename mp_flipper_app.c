@@ -51,8 +51,6 @@ static void load_python_file(FuriString* file_path, FuriString* code) {
 
     bool result = dialog_file_browser_show(dialogs, file_path, file_path, &browser_options);
 
-    furi_record_close(RECORD_DIALOGS);
-
     if(result) {
         result = storage_file_open(file, furi_string_get_cstr(file_path), FSAM_READ, FSOM_OPEN_EXISTING);
     }
@@ -75,6 +73,7 @@ static void load_python_file(FuriString* file_path, FuriString* code) {
     }
 
     storage_file_free(file);
+    furi_record_close(RECORD_DIALOGS);
     furi_record_close(RECORD_STORAGE);
 }
 
@@ -83,14 +82,14 @@ int32_t mp_flipper_app(void* p) {
 
     mp_flipper_canvas = malloc(((SCREEN_WIDTH * SCREEN_HEIGHT) / SCREEN_PIXEL_PER_ITEM) * sizeof(uint32_t));
 
-    const size_t memory_size = memmgr_get_free_heap() * 0.5;
-    const size_t stack_size = 2 * 1024;
-    uint8_t* memory = malloc(memory_size * sizeof(uint8_t));
-
     FuriString* file_path = furi_string_alloc();
     FuriString* code = furi_string_alloc();
 
     load_python_file(file_path, code);
+
+    const size_t memory_size = memmgr_get_free_heap() * 0.5;
+    const size_t stack_size = 2 * 1024;
+    uint8_t* memory = malloc(memory_size * sizeof(uint8_t));
 
     FURI_LOG_I(TAG, "allocated memory is %zu bytes", memory_size);
     FURI_LOG_I(TAG, "stack size is %zu bytes", stack_size);

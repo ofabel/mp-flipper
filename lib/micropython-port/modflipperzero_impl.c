@@ -75,7 +75,7 @@ inline bool mp_flipper_speaker_stop() {
 }
 
 inline void mp_flipper_canvas_draw_dot(uint8_t x, uint8_t y, bool color) {
-    size_t index = (x + 1) / SCREEN_PIXEL_PER_ITEM + y * (SCREEN_WIDTH / SCREEN_PIXEL_PER_ITEM);
+    size_t index = x / SCREEN_PIXEL_PER_ITEM + y * (SCREEN_WIDTH / SCREEN_PIXEL_PER_ITEM);
     const uint32_t mask = 1 << (x % SCREEN_PIXEL_PER_ITEM);
 
     mp_flipper_canvas[index] |= color ? (UINT32_MAX & mask) : 0;
