@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0-alpha.1] - 2024-04-04
+
 ### Added
 
 * Floating point support
@@ -34,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Basic build setup
 * Minimal working example
 
-[Unreleased]: https://github.com/ofabel/mp-flipper/compare/v0.2.0-alpha.1...HEAD
-[0.2.0-alpha.1]: https://github.com/ofabel/mp-flipper/releases/tag/v0.2.0-alpha.1
+[Unreleased]: https://github.com/ofabel/mp-flipper/compare/v0.3.0-alpha.1...HEAD
+[0.3.0-alpha.1]: https://github.com/ofabel/mp-flipper/compare/v0.2.0-alpha.1...v0.3.0-alpha.1
+[0.2.0-alpha.1]: https://github.com/ofabel/mp-flipper/compare/v0.1.0-alpha.1...v0.2.0-alpha.1
 [0.1.0-alpha.1]: https://github.com/ofabel/mp-flipper/releases/tag/v0.1.0-alpha.1
