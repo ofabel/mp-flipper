@@ -3,6 +3,7 @@
 This repository aims to add [Python](https://www.python.org) support to the famous [Flipper Zero](https://flipperzero.one/) gadget.
 The content of this repository is just work in progress at the moment.
 But the first working examples already look promising.
+Feel free to share your thoughts and ideas in this [issue](https://github.com/flipperdevices/flipperzero-firmware/issues/3559).
 
 ## Requirements
 
