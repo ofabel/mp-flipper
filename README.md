@@ -10,7 +10,7 @@ Feel free to share your thoughts and ideas in this [issue](https://github.com/fl
 * [Git](https://git-scm.com/)
 * [Make](https://www.gnu.org/software/make/)
 * [uFBT](https://pypi.org/project/ufbt/) available in your `PATH` (or you have to adjust the [Makefile](./Makefile)
-* [Flipper Zero](https://flipperzero.one/) (tested with firmware version 0.99.1)
+* [Flipper Zero](https://flipperzero.one/) (tested with firmware version 0.99.1 and 0.100.3)
 
 For compiling MicroPython, you will also need:
 
