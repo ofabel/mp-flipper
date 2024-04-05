@@ -3,9 +3,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
-void* mp_flipper_file_reader_context_alloc(const char* filename);
+#define MP_FLIPPER_FILE_READER_EOF ((uint32_t)(-1))
 
-void mp_flipper_file_reader_context_free(void* data);
+void* mp_flipper_file_reader_context_alloc(const char* filename);
 
 uint32_t mp_flipper_file_reader_read(void* data);
 
