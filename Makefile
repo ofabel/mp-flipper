@@ -22,3 +22,6 @@ build: $(PACKAGE_DIR)
 .PHONY: clear
 clear: clean
 	rm -rf ./extmod ./genhdr ./port ./py ./shared
+
+.PHONY: publish
+	./publish.sh
