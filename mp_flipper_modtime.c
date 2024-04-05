@@ -1,9 +1,12 @@
 #include "py/mphal.h"
+#include "py/obj.h"
 
 #include "mp_flipper_modtime.h"
 
-mp_uint_t mp_time_time_get(void) {
-    return mp_flipper_get_timestamp();
+mp_obj_t mp_time_time_get(void) {
+    uint32_t timestamp = mp_flipper_get_timestamp();
+
+    return mp_obj_new_int(timestamp);
 }
 
 uint64_t mp_hal_time_ns(void) {
