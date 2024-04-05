@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#include <py/objint.h>
-#include <py/obj.h>
-#include <py/runtime.h>
+#include "py/objint.h"
+#include "py/obj.h"
+#include "py/runtime.h"
 
-#include "modflipperzero.h"
+#include "mp_flipper_modflipperzero.h"
 
 static mp_obj_t flipperzero_light_set(mp_obj_t light_obj, mp_obj_t brightness_obj) {
     mp_int_t light = mp_obj_get_int(light_obj);

@@ -2,6 +2,7 @@
 #include <float.h>
 #include <math.h>
 
+#ifndef FORCE_EVAL
 #define FORCE_EVAL(x)                            \
     do {                                         \
         if(sizeof(x) == sizeof(float)) {         \
@@ -18,7 +19,9 @@
             (void)__x;                           \
         }                                        \
     } while(0)
+#endif
 
+#ifndef floor
 float floorf(float x) {
     union {
         float f;
@@ -43,7 +46,9 @@ float floorf(float x) {
     }
     return u.f;
 }
+#endif
 
+#ifndef fmodf
 float fmodf(float x, float y) {
     union {
         float f;
@@ -107,7 +112,9 @@ float fmodf(float x, float y) {
     ux.i = uxi;
     return ux.f;
 }
+#endif
 
+#ifndef nearbyintf
 float nearbyintf(float x) {
     union {
         float f;
@@ -125,18 +132,4 @@ float nearbyintf(float x) {
     if(y == 0) return s ? -0.0f : 0.0f;
     return y;
 }
-
-//
-// __aebi_x2x functions are just here to prevent compiler warnings
-//
-double __aeabi_i2d(int x) {
-    return (double)x;
-}
-
-float __aeabi_d2f(double x) {
-    return (float)x;
-}
-
-double __aeabi_f2d(float x) {
-    return (double)x;
-}
+#endif

@@ -13,7 +13,7 @@ typedef long mp_off_t;
 #include <alloca.h>
 #endif
 
-#define MICROPY_MPHALPORT_H "lib/micropython-port/mphalport.h"
+#define MICROPY_MPHALPORT_H "mp_flipper_halport.h"
 
 #define MICROPY_CONFIG_ROM_LEVEL (MICROPY_CONFIG_ROM_LEVEL_BASIC_FEATURES)
 

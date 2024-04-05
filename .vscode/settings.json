@@ -1,0 +1,16 @@
+{
+  "files.associations": {
+    "mp_flipper_app.h": "c",
+    "builtin.h": "c",
+    "reader.h": "c",
+    "stdint.h": "c",
+    "mp_flipper_modtime.h": "c",
+    "mphal.h": "c",
+    "mp_flipper_modflipperzero.h": "c",
+    "mp_flipper_halport.h": "c",
+    "fstream": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "string_view": "cpp"
+  }
+}

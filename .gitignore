@@ -1,4 +1,3 @@
 /build-embed/
-/lib/micropython-build/
-/compile_flags.txt
+/build/
 *.kate-swp

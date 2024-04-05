@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Library to include in firmware repository.
+* All generated files from the build prozess are now part of the repository
+
+### Removed
+
+* Everything related to the Flipper Zero application.
+
 ## [0.3.0-alpha.1] - 2024-04-04
 
 ### Added
