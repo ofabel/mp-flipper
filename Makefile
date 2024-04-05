@@ -3,9 +3,9 @@ MICROPYTHON_TOP = ./lib/micropython
 
 PACKAGE_DIR = ./build
 
-SRC_C = ./modflipperzero.c
+SRC_C = ./mp_flipper_modflipperzero.c
 
-SRC_QSTR += ./modflipperzero.c
+SRC_QSTR += ./mp_flipper_modflipperzero.c
 
 include ./Makefile.micropython
 
@@ -24,4 +24,5 @@ clear: clean
 	rm -rf ./extmod ./genhdr ./port ./py ./shared
 
 .PHONY: publish
+publish:
 	./publish.sh
