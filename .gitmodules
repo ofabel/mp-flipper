@@ -1,3 +1,5 @@
 [submodule "lib/micropython"]
 	path = lib/micropython
 	url = https://github.com/micropython/micropython.git
+	active = false
+	ignore = all
