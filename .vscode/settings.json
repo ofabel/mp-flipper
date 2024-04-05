@@ -12,6 +12,7 @@
     "array": "cpp",
     "string": "cpp",
     "string_view": "cpp",
-    "mp_flipper_file_reader.h": "c"
+    "mp_flipper_file_reader.h": "c",
+    "gchelper.h": "c"
   }
 }
