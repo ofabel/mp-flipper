@@ -31,6 +31,7 @@ typedef long mp_off_t;
 #define MICROPY_HW_BOARD_NAME "Flipper Zero"
 #define MICROPY_HW_MCU_NAME "STM32WB55RG"
 
+#define MICROPY_PY___FILE__ (1)
 #define MICROPY_ENABLE_EXTERNAL_IMPORT (1)
 #define MICROPY_READER_VFS (1)
 
