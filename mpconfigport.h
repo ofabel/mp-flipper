@@ -21,7 +21,7 @@ typedef long mp_off_t;
 #define MICROPY_ENABLE_GC (1)
 #define MICROPY_ALLOC_PATH_MAX (128)
 
-#define MICROPY_GC_STACK_ENTRY_TYPE size_t
+#define MICROPY_GC_STACK_ENTRY_TYPE uint8_t
 
 #define MICROPY_MIN_USE_CORTEX_CPU (1)
 #define MICROPY_MIN_USE_STM32_MCU (1)
