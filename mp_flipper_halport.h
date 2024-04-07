@@ -10,5 +10,6 @@ typedef enum {
 } mp_flipper_import_stat_t;
 
 void mp_flipper_stdout_tx_str(const char* str);
+void mp_flipper_stdout_tx_strn_cooked(const char* str, size_t len);
 
 mp_flipper_import_stat_t mp_flipper_import_stat(const char* path);
