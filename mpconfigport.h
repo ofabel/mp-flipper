@@ -19,6 +19,7 @@ typedef long mp_off_t;
 
 #define MICROPY_ENABLE_COMPILER (1)
 #define MICROPY_ENABLE_GC (1)
+#define MICROPY_ENABLE_PYSTACK (0)
 #define MICROPY_ALLOC_PATH_MAX (128)
 
 #define MICROPY_GC_STACK_ENTRY_TYPE uint8_t
