@@ -11,3 +11,4 @@ void mp_flipper_exec_str(const char* str);
 void mp_flipper_exec_file(const char* code, const char* file_path);
 void mp_flipper_deinit();
 void mp_flipper_nlr_jump_fail(void* val);
+void mp_flipper_fatal_error(const char* str);

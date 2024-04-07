@@ -83,4 +83,8 @@ void __assert_func(const char* file, int line, const char* func, const char* exp
     for(;;) {
     }
 }
+
+void NORETURN __fatal_error(const char* msg) {
+    mp_flipper_fatal_error(msg);
+}
 #endif
