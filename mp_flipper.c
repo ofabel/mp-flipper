@@ -45,7 +45,8 @@ void mp_flipper_exec_file(const char* code, const char* file_path) {
 
     if(nlr_push(&nlr) == 0) {
         // Compile, parse and execute the given string.
-        mp_lexer_t* lex = mp_lexer_new_from_str_len(MP_OBJ_NEW_QSTR(file_path), code, strlen(code), 0);
+        mp_obj_t path = mp_obj_new_str(file_path, strlen(file_path));
+        mp_lexer_t* lex = mp_lexer_new_from_str_len(path, code, strlen(code), 0);
         qstr source_name = lex->source_name;
         mp_parse_tree_t parse_tree = mp_parse(lex, MP_PARSE_FILE_INPUT);
         mp_obj_t module_fun = mp_compile(&parse_tree, source_name, false);
