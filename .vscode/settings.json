@@ -17,6 +17,14 @@
     "modtime.h": "c",
     "obj.h": "c",
     "mpconfig.h": "c",
-    "misc.h": "c"
+    "misc.h": "c",
+    "gc.h": "c",
+    "mp_flipper.h": "c",
+    "runtime.h": "c",
+    "micropython_embed.h": "c",
+    "stackctrl.h": "c",
+    "compile.h": "c",
+    "string.h": "c",
+    "stddef.h": "c"
   }
 }

@@ -15,14 +15,14 @@ $(PACKAGE_DIR): all
 build: $(PACKAGE_DIR)
 	cp -r $(PACKAGE_DIR)/extmod ./
 	cp -r $(PACKAGE_DIR)/genhdr ./
-	cp -r $(PACKAGE_DIR)/port ./
+	rm -rf $(PACKAGE_DIR)/port ./port
 	cp -r $(PACKAGE_DIR)/py ./
 	cp -r $(PACKAGE_DIR)/shared ./
 
 .PHONY: clear
 clear: clean
-	rm -rf ./extmod ./genhdr ./port ./py ./shared
+	rm -rf ./extmod ./genhdr ./py ./shared
 
 .PHONY: publish
-publish:
+publish: build
 	./publish.sh

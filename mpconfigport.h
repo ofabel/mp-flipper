@@ -19,6 +19,9 @@ typedef long mp_off_t;
 
 #define MICROPY_ENABLE_COMPILER (1)
 #define MICROPY_ENABLE_GC (1)
+#define MICROPY_ENABLE_PYSTACK (0)
+#define MICROPY_STACK_CHECK (1)
+#define MICROPY_ALLOC_PATH_MAX (128)
 
 #define MICROPY_GC_STACK_ENTRY_TYPE uint32_t
 
@@ -28,6 +31,7 @@ typedef long mp_off_t;
 #define MICROPY_HW_BOARD_NAME "Flipper Zero"
 #define MICROPY_HW_MCU_NAME "STM32WB55RG"
 
+#define MICROPY_PY___FILE__ (1)
 #define MICROPY_ENABLE_EXTERNAL_IMPORT (1)
 #define MICROPY_READER_VFS (1)
 

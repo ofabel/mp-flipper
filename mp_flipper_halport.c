@@ -11,6 +11,10 @@ void mp_hal_stdout_tx_str(const char* str) {
     mp_flipper_stdout_tx_str(str);
 }
 
+void mp_hal_stdout_tx_strn_cooked(const char* str, size_t len) {
+    mp_flipper_stdout_tx_strn_cooked(str, len);
+}
+
 mp_import_stat_t mp_import_stat(const char* path) {
     mp_flipper_import_stat_t stat = mp_flipper_import_stat(path);
 

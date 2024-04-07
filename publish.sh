@@ -5,12 +5,14 @@ readonly TARGET='./temp'
 
 set -e
 
+rm -rf ${TARGET}
+
 git clone --branch ${BRANCH} git@github.com:ofabel/mp-flipper.git ${TARGET}
 
 rm -rf ${TARGET}/*
 
 cp *.c *.h temp/
-cp -r ./extmod ./genhdr ./port ./py ./shared ${TARGET}
+cp -r ./extmod ./genhdr ./py ./shared ${TARGET}
 
 cd ${TARGET}
 
