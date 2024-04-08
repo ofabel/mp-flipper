@@ -25,6 +25,12 @@
     "stackctrl.h": "c",
     "compile.h": "c",
     "string.h": "c",
-    "stddef.h": "c"
+    "stddef.h": "c",
+    "vfs_posix.h": "c",
+    "vfs_lfs.h": "c",
+    "vfs_fat.h": "c",
+    "*.tcc": "c",
+    "setjmp.h": "c",
+    "mperrno.h": "c"
   }
 }

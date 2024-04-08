@@ -5,7 +5,11 @@
 
 #include "mp_flipper_halport.h"
 
-const mp_obj_fun_builtin_var_t mp_builtin_open_obj;
+mp_obj_t mp_builtin_open(size_t n_args, const mp_obj_t* args, mp_map_t* kwargs) {
+    return mp_const_none;
+}
+
+MP_DEFINE_CONST_FUN_OBJ_KW(mp_builtin_open_obj, 1, mp_builtin_open);
 
 void mp_hal_stdout_tx_str(const char* str) {
     mp_flipper_stdout_tx_str(str);

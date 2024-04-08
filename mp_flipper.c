@@ -7,6 +7,7 @@
 #include "shared/runtime/gchelper.h"
 
 #include "mp_flipper.h"
+#include "mp_flipper_halport.h"
 
 const char* mp_flipper_root_module_path;
 
@@ -41,17 +42,27 @@ void mp_flipper_exec_str(const char* code) {
     }
 }
 
-void mp_flipper_exec_file(const char* code, const char* file_path) {
+void mp_flipper_exec_file(const char* file_path) {
     nlr_buf_t nlr;
 
     if(nlr_push(&nlr) == 0) {
-        // Compile, parse and execute the given string.
-        mp_lexer_t* lex = mp_lexer_new_from_file(qstr_from_str(file_path));
-        qstr source_name = lex->source_name;
-        mp_store_global(MP_QSTR___file__, MP_OBJ_NEW_QSTR(source_name));
-        mp_parse_tree_t parse_tree = mp_parse(lex, MP_PARSE_FILE_INPUT);
-        mp_obj_t module_fun = mp_compile(&parse_tree, source_name, false);
-        mp_call_function_0(module_fun);
+        do {
+            // check if file exists
+            if(mp_flipper_import_stat(file_path) == MP_FLIPPER_IMPORT_STAT_NO_EXIST) {
+                mp_raise_OSError_with_filename(MP_ENOENT, file_path);
+
+                break;
+            }
+
+            // Compile, parse and execute the given string.
+            mp_lexer_t* lex = mp_lexer_new_from_file(qstr_from_str(file_path));
+            qstr source_name = lex->source_name;
+            mp_store_global(MP_QSTR___file__, MP_OBJ_NEW_QSTR(source_name));
+            mp_parse_tree_t parse_tree = mp_parse(lex, MP_PARSE_FILE_INPUT);
+            mp_obj_t module_fun = mp_compile(&parse_tree, source_name, false);
+            mp_call_function_0(module_fun);
+        } while(false);
+
         nlr_pop();
     } else {
         // Uncaught exception: print it out.
@@ -80,7 +91,18 @@ void gc_collect(void) {
 #ifndef NDEBUG
 // Used when debugging is enabled.
 void __assert_func(const char* file, int line, const char* func, const char* expr) {
-    for(;;) {
-    }
+    mp_flipper_assert(file, line, func, expr);
+}
+
+void NORETURN __fatal_error(const char* msg) {
+    mp_flipper_fatal_error(msg);
 }
 #endif
+
+void mp_flipper_raise_os_error(int errno) {
+    mp_raise_OSError(errno);
+}
+
+void mp_flipper_raise_os_error_with_filename(int errno, const char* filename) {
+    mp_raise_OSError_with_filename(errno, filename);
+}
