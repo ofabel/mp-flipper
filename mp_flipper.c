@@ -41,7 +41,7 @@ void mp_flipper_exec_str(const char* code) {
     }
 }
 
-void mp_flipper_exec_file(const char* code, const char* file_path) {
+void mp_flipper_exec_file(const char* file_path) {
     nlr_buf_t nlr;
 
     if(nlr_push(&nlr) == 0) {
@@ -80,8 +80,7 @@ void gc_collect(void) {
 #ifndef NDEBUG
 // Used when debugging is enabled.
 void __assert_func(const char* file, int line, const char* func, const char* expr) {
-    for(;;) {
-    }
+    mp_flipper_assert_func(file, line, func, expr);
 }
 
 void NORETURN __fatal_error(const char* msg) {
