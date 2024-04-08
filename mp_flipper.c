@@ -80,7 +80,7 @@ void gc_collect(void) {
 #ifndef NDEBUG
 // Used when debugging is enabled.
 void __assert_func(const char* file, int line, const char* func, const char* expr) {
-    mp_flipper_assert_func(file, line, func, expr);
+    mp_flipper_assert(file, line, func, expr);
 }
 
 void NORETURN __fatal_error(const char* msg) {
