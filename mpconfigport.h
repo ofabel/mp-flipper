@@ -36,7 +36,6 @@ typedef long mp_off_t;
 #define MICROPY_PY___FILE__ (1)
 #define MICROPY_ENABLE_EXTERNAL_IMPORT (1)
 #define MICROPY_READER_VFS (1)
-#define MICROPY_VFS_POSIX (1)
 
 #define MICROPY_PY_TIME (1)
 #define MICROPY_PY_TIME_TIME_TIME_NS (1)
