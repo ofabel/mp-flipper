@@ -13,3 +13,5 @@ void mp_flipper_deinit();
 void mp_flipper_nlr_jump_fail(void* val);
 void mp_flipper_assert(const char* file, int line, const char* func, const char* expr);
 void mp_flipper_fatal_error(const char* msg);
+void mp_flipper_raise_os_error(int errno);
+void mp_flipper_raise_os_error_with_filename(int errno, const char* filename);

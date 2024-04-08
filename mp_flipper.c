@@ -87,3 +87,11 @@ void NORETURN __fatal_error(const char* msg) {
     mp_flipper_fatal_error(msg);
 }
 #endif
+
+void mp_flipper_raise_os_error(int errno) {
+    mp_raise_OSError(errno);
+}
+
+void mp_flipper_raise_os_error_with_filename(int errno, const char* filename) {
+    mp_raise_OSError_with_filename(errno, filename);
+}

@@ -39,6 +39,9 @@ typedef long mp_off_t;
 
 #define MICROPY_ENABLE_VM_ABORT (1)
 
+#define MICROPY_PY_ERRNO (1)
+#define MICROPY_USE_INTERNAL_ERRNO (1)
+
 #define MICROPY_PY_TIME (1)
 #define MICROPY_PY_TIME_TIME_TIME_NS (1)
 
