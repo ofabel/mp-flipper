@@ -7,6 +7,7 @@
 #include "shared/runtime/gchelper.h"
 
 #include "mp_flipper.h"
+#include "mp_flipper_halport.h"
 
 const char* mp_flipper_root_module_path;
 
@@ -47,7 +48,7 @@ void mp_flipper_exec_file(const char* file_path) {
     if(nlr_push(&nlr) == 0) {
         do {
             // check if file exists
-            if(!mp_flipper_can_resolve_filesystem_path(file_path)) {
+            if(mp_flipper_import_stat(file_path) == MP_FLIPPER_IMPORT_STAT_NO_EXIST) {
                 mp_raise_OSError_with_filename(MP_ENOENT, file_path);
 
                 break;
