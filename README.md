@@ -1,9 +1,12 @@
 # MicroPython Flipper Zero
 
-This repository aims to add [Python](https://www.python.org) support to the famous [Flipper Zero](https://flipperzero.one/) gadget.
-The content of this repository is just work in progress at the moment.
-But the first working examples already look promising.
-Feel free to share your thoughts and ideas in this [issue](https://github.com/flipperdevices/flipperzero-firmware/issues/3559).
+This branch contains the research of adding [Python](https://www.python.org) support to the famous [Flipper Zero](https://flipperzero.one/) gadget.
+~~The content of this repository is just work in progress at the moment.
+But the first working examples already look promising.~~
+The research phase was successful and the development has moved to a [fork of the original firmware](https://github.com/ofabel/flipperzero-firmware).
+The [lib](https://github.com/ofabel/mp-flipper/tree/lib) branch of this repository contains just the MicroPython library.
+
+Check the progress in this [issue](https://github.com/flipperdevices/flipperzero-firmware/issues/3559) and feel free to share your thoughts and ideas.
 
 ## Requirements
 
