@@ -28,17 +28,12 @@ extern const struct _mp_obj_module_t mp_module_micropython;
 #undef MODULE_DEF_MICROPYTHON
 #define MODULE_DEF_MICROPYTHON { MP_ROM_QSTR(MP_QSTR_micropython), MP_ROM_PTR(&mp_module_micropython) },
 
-extern const struct _mp_obj_module_t mp_module_sys;
-#undef MODULE_DEF_SYS
-#define MODULE_DEF_SYS { MP_ROM_QSTR(MP_QSTR_sys), MP_ROM_PTR(&mp_module_sys) },
-
 
 #define MICROPY_REGISTERED_MODULES \
     MODULE_DEF_BUILTINS \
     MODULE_DEF_FLIPPERZERO \
     MODULE_DEF_GC \
     MODULE_DEF_MICROPYTHON \
-    MODULE_DEF_SYS \
     MODULE_DEF___MAIN__ \
 // MICROPY_REGISTERED_MODULES
 
@@ -46,8 +41,3 @@ extern const struct _mp_obj_module_t mp_module_sys;
     MODULE_DEF_ARRAY \
     MODULE_DEF_RANDOM \
 // MICROPY_REGISTERED_EXTENSIBLE_MODULES
-
-extern void mp_module_sys_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest);
-#define MICROPY_MODULE_DELEGATIONS \
-    { MP_ROM_PTR(&mp_module_sys), mp_module_sys_attr }, \
-// MICROPY_MODULE_DELEGATIONS
