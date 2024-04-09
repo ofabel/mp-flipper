@@ -12,14 +12,6 @@ extern const struct _mp_obj_module_t mp_module_random;
 #undef MODULE_DEF_RANDOM
 #define MODULE_DEF_RANDOM { MP_ROM_QSTR(MP_QSTR_random), MP_ROM_PTR(&mp_module_random) },
 
-extern const struct _mp_obj_module_t mp_module_struct;
-#undef MODULE_DEF_STRUCT
-#define MODULE_DEF_STRUCT { MP_ROM_QSTR(MP_QSTR_struct), MP_ROM_PTR(&mp_module_struct) },
-
-extern const struct _mp_obj_module_t mp_module_time;
-#undef MODULE_DEF_TIME
-#define MODULE_DEF_TIME { MP_ROM_QSTR(MP_QSTR_time), MP_ROM_PTR(&mp_module_time) },
-
 extern const struct _mp_obj_module_t mp_module___main__;
 #undef MODULE_DEF___MAIN__
 #define MODULE_DEF___MAIN__ { MP_ROM_QSTR(MP_QSTR___main__), MP_ROM_PTR(&mp_module___main__) },
@@ -58,8 +50,6 @@ extern const struct _mp_obj_module_t mp_module_sys;
     MODULE_DEF_ARRAY \
     MODULE_DEF_IO \
     MODULE_DEF_RANDOM \
-    MODULE_DEF_STRUCT \
-    MODULE_DEF_TIME \
 // MICROPY_REGISTERED_EXTENSIBLE_MODULES
 
 extern void mp_module_sys_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest);

@@ -90,7 +90,7 @@ typedef long mp_off_t;
 #define MICROPY_PY_BUILTINS_INPUT (0)
 #define MICROPY_PY_COLLECTIONS (0)
 #define MICROPY_PY_IO (1)
-#define MICROPY_PY_STRUCT (1)
+#define MICROPY_PY_STRUCT (0)
 #define MICROPY_PY_SYS (1)
 #define MICROPY_PY_SYS_MODULES (1)
 #define MICROPY_PY_SELECT_SELECT (0)
