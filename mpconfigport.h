@@ -1,7 +1,7 @@
 #include <stdint.h>
 
-#define IS_COMPILER (0)
-#define IS_RUNTIME (IS_COMPILER == 0)
+#define IS_COMPILER (1)
+#define IS_RUNTIME (1)
 
 // Type definitions for the specific machine
 
