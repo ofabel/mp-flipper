@@ -4,25 +4,9 @@ extern const struct _mp_obj_module_t mp_module_array;
 #undef MODULE_DEF_ARRAY
 #define MODULE_DEF_ARRAY { MP_ROM_QSTR(MP_QSTR_array), MP_ROM_PTR(&mp_module_array) },
 
-extern const struct _mp_obj_module_t mp_module_collections;
-#undef MODULE_DEF_COLLECTIONS
-#define MODULE_DEF_COLLECTIONS { MP_ROM_QSTR(MP_QSTR_collections), MP_ROM_PTR(&mp_module_collections) },
-
-extern const struct _mp_obj_module_t mp_module_errno;
-#undef MODULE_DEF_ERRNO
-#define MODULE_DEF_ERRNO { MP_ROM_QSTR(MP_QSTR_errno), MP_ROM_PTR(&mp_module_errno) },
-
-extern const struct _mp_obj_module_t mp_module_io;
-#undef MODULE_DEF_IO
-#define MODULE_DEF_IO { MP_ROM_QSTR(MP_QSTR_io), MP_ROM_PTR(&mp_module_io) },
-
 extern const struct _mp_obj_module_t mp_module_random;
 #undef MODULE_DEF_RANDOM
 #define MODULE_DEF_RANDOM { MP_ROM_QSTR(MP_QSTR_random), MP_ROM_PTR(&mp_module_random) },
-
-extern const struct _mp_obj_module_t mp_module_struct;
-#undef MODULE_DEF_STRUCT
-#define MODULE_DEF_STRUCT { MP_ROM_QSTR(MP_QSTR_struct), MP_ROM_PTR(&mp_module_struct) },
 
 extern const struct _mp_obj_module_t mp_module_time;
 #undef MODULE_DEF_TIME
@@ -48,31 +32,17 @@ extern const struct _mp_obj_module_t mp_module_micropython;
 #undef MODULE_DEF_MICROPYTHON
 #define MODULE_DEF_MICROPYTHON { MP_ROM_QSTR(MP_QSTR_micropython), MP_ROM_PTR(&mp_module_micropython) },
 
-extern const struct _mp_obj_module_t mp_module_sys;
-#undef MODULE_DEF_SYS
-#define MODULE_DEF_SYS { MP_ROM_QSTR(MP_QSTR_sys), MP_ROM_PTR(&mp_module_sys) },
-
 
 #define MICROPY_REGISTERED_MODULES \
     MODULE_DEF_BUILTINS \
     MODULE_DEF_FLIPPERZERO \
     MODULE_DEF_GC \
     MODULE_DEF_MICROPYTHON \
-    MODULE_DEF_SYS \
     MODULE_DEF___MAIN__ \
 // MICROPY_REGISTERED_MODULES
 
 #define MICROPY_REGISTERED_EXTENSIBLE_MODULES \
     MODULE_DEF_ARRAY \
-    MODULE_DEF_COLLECTIONS \
-    MODULE_DEF_ERRNO \
-    MODULE_DEF_IO \
     MODULE_DEF_RANDOM \
-    MODULE_DEF_STRUCT \
     MODULE_DEF_TIME \
 // MICROPY_REGISTERED_EXTENSIBLE_MODULES
-
-extern void mp_module_sys_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest);
-#define MICROPY_MODULE_DELEGATIONS \
-    { MP_ROM_PTR(&mp_module_sys), mp_module_sys_attr }, \
-// MICROPY_MODULE_DELEGATIONS

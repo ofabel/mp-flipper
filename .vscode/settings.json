@@ -31,6 +31,8 @@
     "vfs_fat.h": "c",
     "*.tcc": "c",
     "setjmp.h": "c",
-    "mperrno.h": "c"
+    "mperrno.h": "c",
+    "stdlib.h": "c",
+    "persistentcode.h": "c"
   }
 }
