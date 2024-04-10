@@ -102,8 +102,6 @@ void mp_flipper_compile_and_save_file(const char* py_file_path, const char* mpy_
     if(nlr_push(&nlr) == 0) {
         mp_lexer_t* lex = mp_lexer_new_from_file(qstr_from_str(py_file_path));
 
-        qstr source_name = qstr_from_str(lex->source_name);
-
         mp_store_global(MP_QSTR___file__, MP_OBJ_NEW_QSTR(lex->source_name));
 
         mp_parse_tree_t parse_tree = mp_parse(lex, MP_PARSE_FILE_INPUT);
