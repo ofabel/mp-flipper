@@ -26,6 +26,7 @@ void mp_flipper_init(void* heap, size_t heap_size, size_t stack_size, void* stac
 }
 
 void mp_flipper_exec_str(const char* code) {
+#if MP_FLIPPER_IS_COMPILER
     nlr_buf_t nlr;
 
     if(nlr_push(&nlr) == 0) {
@@ -40,9 +41,11 @@ void mp_flipper_exec_str(const char* code) {
         // Uncaught exception: print it out.
         mp_obj_print_exception(&mp_plat_print, (mp_obj_t)nlr.ret_val);
     }
+#endif
 }
 
 void mp_flipper_exec_py_file(const char* file_path) {
+#if MP_FLIPPER_IS_COMPILER
     nlr_buf_t nlr;
 
     if(nlr_push(&nlr) == 0) {
@@ -67,9 +70,11 @@ void mp_flipper_exec_py_file(const char* file_path) {
         // Uncaught exception: print it out.
         mp_obj_print_exception(&mp_plat_print, (mp_obj_t)nlr.ret_val);
     }
+#endif
 }
 
 void mp_flipper_exec_mpy_file(const char* file_path) {
+#if MP_FLIPPER_IS_RUNTIME
     nlr_buf_t nlr;
     if(nlr_push(&nlr) == 0) {
         do {
@@ -94,9 +99,11 @@ void mp_flipper_exec_mpy_file(const char* file_path) {
         // Uncaught exception: print it out.
         mp_obj_print_exception(&mp_plat_print, (mp_obj_t)nlr.ret_val);
     }
+#endif
 }
 
 void mp_flipper_compile_and_save_file(const char* py_file_path, const char* mpy_file_path) {
+#if MP_FLIPPER_IS_COMPILER
     nlr_buf_t nlr;
 
     if(nlr_push(&nlr) == 0) {
@@ -130,6 +137,7 @@ void mp_flipper_compile_and_save_file(const char* py_file_path, const char* mpy_
         // Uncaught exception: print it out.
         mp_obj_print_exception(&mp_plat_print, (mp_obj_t)nlr.ret_val);
     }
+#endif
 }
 
 void mp_flipper_deinit() {

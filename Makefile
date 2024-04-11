@@ -24,5 +24,5 @@ clear: clean
 	rm -rf ./extmod ./genhdr ./py ./shared
 
 .PHONY: publish
-publish: build
+publish:
 	./publish.sh
