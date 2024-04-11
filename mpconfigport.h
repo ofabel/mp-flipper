@@ -58,7 +58,7 @@ typedef long mp_off_t;
 #define MICROPY_PY_ERRNO_ERRORCODE (0)
 
 #define MICROPY_PY_TIME (1)
-#define MICROPY_PY_TIME_TIME_TIME_NS (0)
+#define MICROPY_PY_TIME_TIME_TIME_NS (1)
 
 #define MICROPY_PY_RANDOM (1)
 #define MICROPY_PY_RANDOM_EXTRA_FUNCS (0)
