@@ -169,10 +169,10 @@ void NORETURN __fatal_error(const char* msg) {
 }
 #endif
 
-void mp_flipper_raise_os_error(int errno) {
-    mp_raise_OSError(errno);
+void mp_flipper_raise_os_error(int error) {
+    mp_raise_OSError(error);
 }
 
-void mp_flipper_raise_os_error_with_filename(int errno, const char* filename) {
-    mp_raise_OSError_with_filename(errno, filename);
+void mp_flipper_raise_os_error_with_filename(int error, const char* filename) {
+    mp_raise_OSError_with_filename(error, filename);
 }
