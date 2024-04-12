@@ -12,11 +12,15 @@
 
 const char* mp_flipper_root_module_path;
 
+void* mp_flipper_context;
+
 void mp_flipper_set_root_module_path(const char* path) {
     mp_flipper_root_module_path = path;
 }
 
 void mp_flipper_init(void* heap, size_t heap_size, size_t stack_size, void* stack_top) {
+    mp_flipper_context = mp_flipper_context_alloc();
+
     mp_stack_set_top(stack_top);
     mp_stack_set_limit(stack_size);
 
@@ -28,6 +32,7 @@ void mp_flipper_init(void* heap, size_t heap_size, size_t stack_size, void* stac
 void mp_flipper_exec_mpy_file(const char* file_path) {
 #if MP_FLIPPER_IS_RUNTIME
     nlr_buf_t nlr;
+
     if(nlr_push(&nlr) == 0) {
         do {
             // check if file exists
@@ -56,6 +61,8 @@ void mp_flipper_exec_mpy_file(const char* file_path) {
 
 void mp_flipper_deinit() {
     mp_deinit();
+
+    mp_flipper_context_free(mp_flipper_context);
 }
 
 // Called if an exception is raised outside all C exception-catching handlers.
