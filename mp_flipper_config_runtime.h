@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef MP_FLIPPER_IS_COMPILER
 #define MP_FLIPPER_IS_COMPILER (0)
 #endif

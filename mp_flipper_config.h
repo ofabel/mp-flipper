@@ -1,5 +1,3 @@
-#pragma once
-
 #include <stdint.h>
 
 #ifndef MP_FLIPPER_IS_COMPILER
