@@ -4,15 +4,14 @@
 
 #include "py/mperrno.h"
 
+#include "mp_flipper_config.h"
+
 extern const char* mp_flipper_root_module_path;
 
 void mp_flipper_set_root_module_path(const char* path);
 
 void mp_flipper_init(void* memory, size_t memory_size, size_t stack_size, void* stack_top);
-void mp_flipper_exec_str(const char* str);
-void mp_flipper_exec_py_file(const char* file_path);
 void mp_flipper_exec_mpy_file(const char* file_path);
-void mp_flipper_compile_and_save_file(const char* py_file_path, const char* mpy_file_path);
 void mp_flipper_save_file(const char* file_path, const char* data, size_t size);
 void mp_flipper_deinit();
 void mp_flipper_nlr_jump_fail(void* value);
