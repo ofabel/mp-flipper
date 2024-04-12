@@ -2,7 +2,7 @@
 
 #ifndef MP_FLIPPER_IS_COMPILER
 #ifndef MP_FLIPPER_COMPILER
-#define MP_FLIPPER_IS_COMPILER (0)
+#define MP_FLIPPER_IS_COMPILER (1)
 #else
 #define MP_FLIPPER_IS_COMPILER (1)
 #endif
@@ -10,7 +10,7 @@
 
 #ifndef MP_FLIPPER_IS_RUNTIME
 #ifndef MP_FLIPPER_RUNTIME
-#define MP_FLIPPER_IS_RUNTIME (0)
+#define MP_FLIPPER_IS_RUNTIME (1)
 #else
 #define MP_FLIPPER_IS_RUNTIME (1)
 #endif
