@@ -115,3 +115,4 @@ typedef long mp_off_t;
 #define MICROPY_PY_RE (0)
 #define MICROPY_PY_CRYPTOLIB (0)
 #define MICROPY_PY_VFS (0)
+#define MICROPY_ENABLE_SCHEDULER (1)
