@@ -33,6 +33,14 @@
     "setjmp.h": "c",
     "mperrno.h": "c",
     "stdlib.h": "c",
-    "persistentcode.h": "c"
+    "persistentcode.h": "c",
+    "mpconfigport.h": "c",
+    "mp_flipper_config.h": "c",
+    "root_pointers.h": "c",
+    "objfun.h": "c",
+    "mpprint.h": "c",
+    "mp_flipper_compiler.h": "c",
+    "mp_flipper_runtime.h": "c",
+    "unicode.h": "c"
   }
 }
