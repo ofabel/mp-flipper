@@ -27,4 +27,4 @@ void* mp_flipper_print_data_alloc();
 void mp_flipper_print_strn(void* data, const char* str, size_t length);
 void mp_flipper_print_data_free(void* data);
 void* mp_flipper_context_alloc();
-void mp_flipper_context_free();
+void mp_flipper_context_free(void* context);
