@@ -7,6 +7,8 @@
 
 #include "mp_flipper_modflipperzero.h"
 
+static void* mp_flipper_on_draw = NULL;
+
 static mp_obj_t flipperzero_light_set(mp_obj_t light_obj, mp_obj_t brightness_obj) {
     mp_int_t light = mp_obj_get_int(light_obj);
     mp_int_t brightness = mp_obj_get_int(brightness_obj);
@@ -80,16 +82,20 @@ static mp_obj_t flipperzero_speaker_stop() {
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_speaker_stop_obj, flipperzero_speaker_stop);
 
-static mp_obj_t flipperzero_canvas_draw_dot(mp_obj_t x_obj, mp_obj_t y_obj, mp_obj_t color_obj) {
-    mp_int_t x = mp_obj_get_int(x_obj);
-    mp_int_t y = mp_obj_get_int(y_obj);
-    bool color = mp_obj_is_true(color_obj);
+static mp_obj_t flipperzero_canvas_draw_dot(size_t n_args, const mp_obj_t* args) {
+    if(n_args != 4) {
+        return mp_const_none;
+    }
 
-    mp_flipper_canvas_draw_dot(x, y, color);
+    mp_int_t x = mp_obj_get_int(args[1]);
+    mp_int_t y = mp_obj_get_int(args[2]);
+    bool color = mp_obj_is_true(args[3]);
+
+    mp_flipper_canvas_draw_dot(args[0], x, y, color);
 
     return mp_const_none;
 }
-static MP_DEFINE_CONST_FUN_OBJ_3(flipperzero_canvas_draw_dot_obj, flipperzero_canvas_draw_dot);
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_dot_obj, 4, 4, flipperzero_canvas_draw_dot);
 
 static mp_obj_t flipperzero_canvas_update() {
     mp_flipper_canvas_update();
@@ -99,11 +105,17 @@ static mp_obj_t flipperzero_canvas_update() {
 static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_update_obj, flipperzero_canvas_update);
 
 static mp_obj_t flipperzero_on_draw(mp_obj_t on_draw_obj) {
-    mp_call_function_1(on_draw_obj, mp_const_none);
+    mp_flipper_on_draw = on_draw_obj;
 
     return mp_const_none;
 }
 static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_draw_obj, flipperzero_on_draw);
+
+void mp_flipper_canvas_on_draw(void* canvas) {
+    if(mp_flipper_on_draw != NULL) {
+        mp_call_function_1(mp_flipper_on_draw, canvas);
+    }
+}
 
 static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_flipperzero)},
