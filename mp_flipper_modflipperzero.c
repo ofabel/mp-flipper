@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "py/objint.h"
+#include "py/objfun.h"
 #include "py/obj.h"
 #include "py/runtime.h"
 
@@ -97,6 +98,13 @@ static mp_obj_t flipperzero_canvas_update() {
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_update_obj, flipperzero_canvas_update);
 
+static mp_obj_t flipperzero_on_draw(mp_obj_t on_draw_obj) {
+    mp_call_function_1(on_draw_obj, mp_const_none);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_draw_obj, flipperzero_on_draw);
+
 static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_flipperzero)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_RED), MP_ROM_INT(MP_FLIPPER_LED_RED)},
@@ -113,6 +121,7 @@ static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_speaker_stop), MP_ROM_PTR(&flipperzero_speaker_stop_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_draw_dot), MP_ROM_PTR(&flipperzero_canvas_draw_dot_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_update), MP_ROM_PTR(&flipperzero_canvas_update_obj)},
+    {MP_ROM_QSTR(MP_QSTR_on_draw), MP_ROM_PTR(&flipperzero_on_draw_obj)},
 };
 static MP_DEFINE_CONST_DICT(flipperzero_module_globals, flipperzero_module_globals_table);
 
