@@ -136,7 +136,7 @@ static mp_obj_t flipperzero_canvas_draw_box(size_t n_args, const mp_obj_t* args)
     mp_int_t y = mp_obj_get_int(args[1]);
     mp_int_t width = mp_obj_get_int(args[2]);
     mp_int_t height = mp_obj_get_int(args[3]);
-    mp_int_t radius = n_args == 5 ? mp_obj_get_int(args[4]) : mp_obj_new_int(0);
+    mp_int_t radius = n_args == 5 ? mp_obj_get_int(args[4]) : 0;
 
     mp_flipper_canvas_draw_box(x, y, width, height, radius);
 
@@ -153,7 +153,7 @@ static mp_obj_t flipperzero_canvas_draw_frame(size_t n_args, const mp_obj_t* arg
     mp_int_t y = mp_obj_get_int(args[1]);
     mp_int_t width = mp_obj_get_int(args[2]);
     mp_int_t height = mp_obj_get_int(args[3]);
-    mp_int_t radius = n_args == 5 ? mp_obj_get_int(args[4]) : mp_obj_new_int(0);
+    mp_int_t radius = n_args == 5 ? mp_obj_get_int(args[4]) : 0;
 
     mp_flipper_canvas_draw_frame(x, y, width, height, radius);
 
