@@ -26,6 +26,10 @@
 #define MP_FLIPPER_INPUT_TYPE_REPEAT (1 << 10)
 #define MP_FLIPPER_INPUT_TYPE ((1 << 11) - 1 - MP_FLIPPER_INPUT_BUTTON)
 
+#define MP_FLIPPER_CANVAS_ALIGN_BEGIN (1 << 0)
+#define MP_FLIPPER_CANVAS_ALIGN_CENTER (1 << 1)
+#define MP_FLIPPER_CANVAS_ALIGN_END (1 << 2)
+
 void mp_flipper_light_set(uint8_t raw_light, uint8_t brightness);
 void mp_flipper_light_blink_start(uint8_t raw_light, uint8_t brightness, uint16_t on_time, uint16_t period);
 void mp_flipper_light_blink_set_color(uint8_t raw_light);
@@ -38,8 +42,12 @@ bool mp_flipper_speaker_set_volume(float volume);
 bool mp_flipper_speaker_stop();
 
 void mp_flipper_canvas_draw_dot(uint8_t x, uint8_t y);
+void mp_flipper_canvas_draw_box(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
+void mp_flipper_canvas_draw_frame(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
+void mp_flipper_canvas_draw_line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
 void mp_flipper_canvas_set_color(uint8_t color);
 void mp_flipper_canvas_set_text(uint8_t x, uint8_t y, const char* text);
+void mp_flipper_canvas_set_text_align(uint8_t x, uint8_t y);
 void mp_flipper_canvas_update();
 void mp_flipper_canvas_clear();
 

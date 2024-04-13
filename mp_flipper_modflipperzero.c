@@ -97,6 +97,54 @@ static mp_obj_t flipperzero_canvas_draw_dot(mp_obj_t x_obj, mp_obj_t y_obj) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_2(flipperzero_canvas_draw_dot_obj, flipperzero_canvas_draw_dot);
 
+static mp_obj_t flipperzero_canvas_draw_box(size_t n_args, const mp_obj_t* args) {
+    if(n_args != 4) {
+        return mp_const_none;
+    }
+
+    mp_int_t x = mp_obj_get_int(args[0]);
+    mp_int_t y = mp_obj_get_int(args[1]);
+    mp_int_t width = mp_obj_get_int(args[2]);
+    mp_int_t height = mp_obj_get_int(args[3]);
+
+    mp_flipper_canvas_draw_box(x, y, width, height);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_box_obj, 4, 4, flipperzero_canvas_draw_box);
+
+static mp_obj_t flipperzero_canvas_draw_frame(size_t n_args, const mp_obj_t* args) {
+    if(n_args != 4) {
+        return mp_const_none;
+    }
+
+    mp_int_t x = mp_obj_get_int(args[0]);
+    mp_int_t y = mp_obj_get_int(args[1]);
+    mp_int_t width = mp_obj_get_int(args[2]);
+    mp_int_t height = mp_obj_get_int(args[3]);
+
+    mp_flipper_canvas_draw_frame(x, y, width, height);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_frame_obj, 4, 4, flipperzero_canvas_draw_frame);
+
+static mp_obj_t flipperzero_canvas_draw_line(size_t n_args, const mp_obj_t* args) {
+    if(n_args != 4) {
+        return mp_const_none;
+    }
+
+    mp_int_t x0 = mp_obj_get_int(args[0]);
+    mp_int_t y0 = mp_obj_get_int(args[1]);
+    mp_int_t x1 = mp_obj_get_int(args[2]);
+    mp_int_t y1 = mp_obj_get_int(args[3]);
+
+    mp_flipper_canvas_draw_line(x0, y0, x1, y1);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_line_obj, 4, 4, flipperzero_canvas_draw_line);
+
 static mp_obj_t flipperzero_canvas_set_color(mp_obj_t color_obj) {
     mp_int_t color = mp_obj_get_int(color_obj);
 
@@ -117,6 +165,16 @@ static mp_obj_t flipperzero_canvas_set_text(mp_obj_t x_obj, mp_obj_t y_obj, mp_o
     return mp_const_none;
 }
 static MP_DEFINE_CONST_FUN_OBJ_3(flipperzero_canvas_set_text_obj, flipperzero_canvas_set_text);
+
+static mp_obj_t flipperzero_canvas_set_text_align(mp_obj_t x_obj, mp_obj_t y_obj) {
+    mp_int_t x = mp_obj_get_int(x_obj);
+    mp_int_t y = mp_obj_get_int(y_obj);
+
+    mp_flipper_canvas_set_text_align(x, y);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_2(flipperzero_canvas_set_text_align_obj, flipperzero_canvas_set_text_align);
 
 static mp_obj_t flipperzero_canvas_update() {
     mp_flipper_canvas_update();
@@ -179,8 +237,12 @@ static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_CANVAS_BLACK), MP_ROM_INT(MP_FLIPPER_COLOR_BLACK)},
     {MP_ROM_QSTR(MP_QSTR_CANVAS_WHITE), MP_ROM_INT(MP_FLIPPER_COLOR_WHITE)},
     {MP_ROM_QSTR(MP_QSTR_canvas_draw_dot), MP_ROM_PTR(&flipperzero_canvas_draw_dot_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_draw_box), MP_ROM_PTR(&flipperzero_canvas_draw_box_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_draw_frame), MP_ROM_PTR(&flipperzero_canvas_draw_frame_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_draw_line), MP_ROM_PTR(&flipperzero_canvas_draw_line_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_set_color), MP_ROM_PTR(&flipperzero_canvas_set_color_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_set_text), MP_ROM_PTR(&flipperzero_canvas_set_text_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_set_text_align), MP_ROM_PTR(&flipperzero_canvas_set_text_align_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_update), MP_ROM_PTR(&flipperzero_canvas_update_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_clear), MP_ROM_PTR(&flipperzero_canvas_clear_obj)},
     {MP_ROM_QSTR(MP_QSTR_on_input), MP_ROM_PTR(&flipperzero_on_input_obj)},
