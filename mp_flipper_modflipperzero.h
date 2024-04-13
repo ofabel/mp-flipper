@@ -8,6 +8,9 @@
 #define MP_FLIPPER_LED_BLUE (1 << 2)
 #define MP_FLIPPER_LED_BACKLIGHT (1 << 3)
 
+#define MP_FLIPPER_COLOR_BLACK (1 << 0);
+#define MP_FLIPPER_COLOR_WHITE (1 << 1);
+
 void mp_flipper_light_set(uint8_t raw_light, uint8_t brightness);
 void mp_flipper_light_blink_start(uint8_t raw_light, uint8_t brightness, uint16_t on_time, uint16_t period);
 void mp_flipper_light_blink_set_color(uint8_t raw_light);
@@ -19,8 +22,7 @@ bool mp_flipper_speaker_start(float frequency, float volume);
 bool mp_flipper_speaker_set_volume(float volume);
 bool mp_flipper_speaker_stop();
 
-void mp_flipper_canvas_draw_dot(uint8_t x, uint8_t y, bool color);
+void mp_flipper_canvas_draw_dot(uint8_t x, uint8_t y);
+void mp_flipper_canvas_set_color(uint8_t color);
+void mp_flipper_canvas_set_text(uint8_t x, uint8_t y, const char* text);
 void mp_flipper_canvas_update();
-void mp_flipper_canvas_on_draw();
-void mp_flipper_canvas_on_draw_begin();
-void mp_flipper_canvas_on_draw_end();
