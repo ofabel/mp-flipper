@@ -99,6 +99,6 @@ void mp_flipper_raise_os_error_with_filename(int error, const char* filename) {
     mp_raise_OSError_with_filename(error, filename);
 }
 
-MP_DEFINE_CONST_FUN_OBJ_0(mp_sched_vm_abort_obj_0, mp_sched_vm_abort);
+const mp_obj_type_t mp_sched_vm_abort_obj;
 
-const void* mp_sched_vm_abort_obj = &mp_sched_vm_abort_obj_0;
+MP_DEFINE_CONST_FUN_OBJ_0(mp_sched_vm_abort_obj, mp_sched_vm_abort);

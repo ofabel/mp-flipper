@@ -117,7 +117,7 @@ typedef long mp_off_t;
 #define MICROPY_PY_VFS (0)
 #define MICROPY_ENABLE_SCHEDULER (1)
 
-extern const void* mp_sched_vm_abort_obj;
+extern const mp_obj_type_t mp_sched_vm_abort_obj;
 
 #define MICROPY_PORT_BUILTINS \
-    { MP_ROM_QSTR(MP_QSTR_quit), MP_ROM_PTR(&(*mp_sched_vm_abort_obj)) }
+    { MP_ROM_QSTR(MP_QSTR_quit), MP_ROM_PTR(&mp_sched_vm_abort_obj) }
