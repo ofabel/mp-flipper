@@ -14,6 +14,13 @@ typedef struct {
 
 static void* mp_flipper_on_input_callback = NULL;
 
+static mp_obj_t flipperzero_quit() {
+    mp_sched_vm_abort();
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_quit_obj, flipperzero_quit);
+
 static mp_obj_t flipperzero_light_set(mp_obj_t light_obj, mp_obj_t brightness_obj) {
     mp_int_t light = mp_obj_get_int(light_obj);
     mp_int_t brightness = mp_obj_get_int(brightness_obj);
@@ -222,6 +229,7 @@ void mp_flipper_on_input(uint16_t button, uint16_t type) {
 
 static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_flipperzero)},
+    {MP_ROM_QSTR(MP_QSTR_quit), MP_ROM_PTR(&flipperzero_quit_obj)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_RED), MP_ROM_INT(MP_FLIPPER_LED_RED)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_GREEN), MP_ROM_INT(MP_FLIPPER_LED_GREEN)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_BLUE), MP_ROM_INT(MP_FLIPPER_LED_BLUE)},
