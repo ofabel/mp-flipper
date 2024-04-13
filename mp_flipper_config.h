@@ -111,7 +111,7 @@ typedef long mp_off_t;
 #define MICROPY_PY_SYS (0)
 #define MICROPY_PY_SYS_MODULES (0)
 #define MICROPY_PY_SELECT_SELECT (0)
-#define MICROPY_PY_JSON (1)
+#define MICROPY_PY_JSON (0)
 #define MICROPY_PY_RE (0)
 #define MICROPY_PY_CRYPTOLIB (0)
 #define MICROPY_PY_VFS (0)

@@ -4,10 +4,6 @@ extern const struct _mp_obj_module_t mp_module_array;
 #undef MODULE_DEF_ARRAY
 #define MODULE_DEF_ARRAY { MP_ROM_QSTR(MP_QSTR_array), MP_ROM_PTR(&mp_module_array) },
 
-extern const struct _mp_obj_module_t mp_module_json;
-#undef MODULE_DEF_JSON
-#define MODULE_DEF_JSON { MP_ROM_QSTR(MP_QSTR_json), MP_ROM_PTR(&mp_module_json) },
-
 extern const struct _mp_obj_module_t mp_module_random;
 #undef MODULE_DEF_RANDOM
 #define MODULE_DEF_RANDOM { MP_ROM_QSTR(MP_QSTR_random), MP_ROM_PTR(&mp_module_random) },
@@ -47,7 +43,6 @@ extern const struct _mp_obj_module_t mp_module_micropython;
 
 #define MICROPY_REGISTERED_EXTENSIBLE_MODULES \
     MODULE_DEF_ARRAY \
-    MODULE_DEF_JSON \
     MODULE_DEF_RANDOM \
     MODULE_DEF_TIME \
 // MICROPY_REGISTERED_EXTENSIBLE_MODULES
