@@ -107,9 +107,20 @@ static mp_obj_t flipperzero_on_draw(mp_obj_t on_draw_obj) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_draw_obj, flipperzero_on_draw);
 
+static mp_obj_t flipperzero_on_draw_call(mp_obj_t _) {
+    mp_call_function_0(mp_flipper_on_draw);
+
+    mp_flipper_canvas_on_draw_end();
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_draw_call_obj, flipperzero_on_draw_call);
+
 void mp_flipper_canvas_on_draw() {
     if(mp_flipper_on_draw != NULL) {
-        mp_sched_schedule(mp_flipper_on_draw, mp_const_none);
+        mp_flipper_canvas_on_draw_begin();
+
+        mp_sched_schedule(flipperzero_on_draw_call, mp_const_none);
     }
 }
 
@@ -130,6 +141,7 @@ static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_canvas_draw_dot), MP_ROM_PTR(&flipperzero_canvas_draw_dot_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_update), MP_ROM_PTR(&flipperzero_canvas_update_obj)},
     {MP_ROM_QSTR(MP_QSTR_on_draw), MP_ROM_PTR(&flipperzero_on_draw_obj)},
+    {MP_ROM_QSTR(MP_QSTR_on_draw_call), MP_ROM_PTR(&flipperzero_on_draw_call_obj)},
 };
 static MP_DEFINE_CONST_DICT(flipperzero_module_globals, flipperzero_module_globals_table);
 
