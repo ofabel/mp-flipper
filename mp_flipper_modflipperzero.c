@@ -14,13 +14,6 @@ typedef struct {
 
 static void* mp_flipper_on_input_callback = NULL;
 
-static mp_obj_t flipperzero_quit() {
-    mp_sched_vm_abort();
-
-    return mp_const_none;
-}
-static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_quit_obj, flipperzero_quit);
-
 static mp_obj_t flipperzero_light_set(mp_obj_t light_obj, mp_obj_t brightness_obj) {
     mp_int_t light = mp_obj_get_int(light_obj);
     mp_int_t brightness = mp_obj_get_int(brightness_obj);
@@ -94,6 +87,36 @@ static mp_obj_t flipperzero_speaker_stop() {
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_speaker_stop_obj, flipperzero_speaker_stop);
 
+static mp_obj_t flipperzero_canvas_width() {
+    uint8_t width = mp_flipper_canvas_width();
+
+    return mp_obj_new_int(width);
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_width_obj, flipperzero_canvas_width);
+
+static mp_obj_t flipperzero_canvas_height() {
+    uint8_t height = mp_flipper_canvas_height();
+
+    return mp_obj_new_int(height);
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_height_obj, flipperzero_canvas_height);
+
+static mp_obj_t flipperzero_canvas_text_width(mp_obj_t text_obj) {
+    const char* text = mp_obj_str_get_str(text_obj);
+
+    uint8_t width = mp_flipper_canvas_text_width(text);
+
+    return mp_obj_new_int(width);
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_canvas_text_width_obj, flipperzero_canvas_text_width);
+
+static mp_obj_t flipperzero_canvas_text_height() {
+    uint8_t height = mp_flipper_canvas_text_height();
+
+    return mp_obj_new_int(height);
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_text_height_obj, flipperzero_canvas_text_height);
+
 static mp_obj_t flipperzero_canvas_draw_dot(mp_obj_t x_obj, mp_obj_t y_obj) {
     mp_int_t x = mp_obj_get_int(x_obj);
     mp_int_t y = mp_obj_get_int(y_obj);
@@ -105,7 +128,7 @@ static mp_obj_t flipperzero_canvas_draw_dot(mp_obj_t x_obj, mp_obj_t y_obj) {
 static MP_DEFINE_CONST_FUN_OBJ_2(flipperzero_canvas_draw_dot_obj, flipperzero_canvas_draw_dot);
 
 static mp_obj_t flipperzero_canvas_draw_box(size_t n_args, const mp_obj_t* args) {
-    if(n_args != 4) {
+    if(n_args < 4) {
         return mp_const_none;
     }
 
@@ -113,15 +136,16 @@ static mp_obj_t flipperzero_canvas_draw_box(size_t n_args, const mp_obj_t* args)
     mp_int_t y = mp_obj_get_int(args[1]);
     mp_int_t width = mp_obj_get_int(args[2]);
     mp_int_t height = mp_obj_get_int(args[3]);
+    mp_int_t radius = n_args == 5 ? mp_obj_get_int(args[4]) : mp_obj_new_int(0);
 
-    mp_flipper_canvas_draw_box(x, y, width, height);
+    mp_flipper_canvas_draw_box(x, y, width, height, radius);
 
     return mp_const_none;
 }
-static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_box_obj, 4, 4, flipperzero_canvas_draw_box);
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_box_obj, 4, 5, flipperzero_canvas_draw_box);
 
 static mp_obj_t flipperzero_canvas_draw_frame(size_t n_args, const mp_obj_t* args) {
-    if(n_args != 4) {
+    if(n_args < 4) {
         return mp_const_none;
     }
 
@@ -129,12 +153,13 @@ static mp_obj_t flipperzero_canvas_draw_frame(size_t n_args, const mp_obj_t* arg
     mp_int_t y = mp_obj_get_int(args[1]);
     mp_int_t width = mp_obj_get_int(args[2]);
     mp_int_t height = mp_obj_get_int(args[3]);
+    mp_int_t radius = n_args == 5 ? mp_obj_get_int(args[4]) : mp_obj_new_int(0);
 
-    mp_flipper_canvas_draw_frame(x, y, width, height);
+    mp_flipper_canvas_draw_frame(x, y, width, height, radius);
 
     return mp_const_none;
 }
-static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_frame_obj, 4, 4, flipperzero_canvas_draw_frame);
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_frame_obj, 4, 5, flipperzero_canvas_draw_frame);
 
 static mp_obj_t flipperzero_canvas_draw_line(size_t n_args, const mp_obj_t* args) {
     if(n_args != 4) {
@@ -151,6 +176,37 @@ static mp_obj_t flipperzero_canvas_draw_line(size_t n_args, const mp_obj_t* args
     return mp_const_none;
 }
 static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_canvas_draw_line_obj, 4, 4, flipperzero_canvas_draw_line);
+
+static mp_obj_t flipperzero_canvas_draw_circle(mp_obj_t x_obj, mp_obj_t y_obj, mp_obj_t r_obj) {
+    mp_int_t x = mp_obj_get_int(x_obj);
+    mp_int_t y = mp_obj_get_int(y_obj);
+    mp_int_t r = mp_obj_get_int(r_obj);
+
+    mp_flipper_canvas_draw_circle(x, y, r);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_3(flipperzero_canvas_draw_circle_obj, flipperzero_canvas_draw_circle);
+
+static mp_obj_t flipperzero_canvas_draw_disc(mp_obj_t x_obj, mp_obj_t y_obj, mp_obj_t r_obj) {
+    mp_int_t x = mp_obj_get_int(x_obj);
+    mp_int_t y = mp_obj_get_int(y_obj);
+    mp_int_t r = mp_obj_get_int(r_obj);
+
+    mp_flipper_canvas_draw_disc(x, y, r);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_3(flipperzero_canvas_draw_disc_obj, flipperzero_canvas_draw_disc);
+
+static mp_obj_t flipperzero_canvas_set_font(mp_obj_t font_obj) {
+    mp_int_t font = mp_obj_get_int(font_obj);
+
+    mp_flipper_canvas_set_font(font);
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_canvas_set_font_obj, flipperzero_canvas_set_font);
 
 static mp_obj_t flipperzero_canvas_set_color(mp_obj_t color_obj) {
     mp_int_t color = mp_obj_get_int(color_obj);
@@ -229,7 +285,6 @@ void mp_flipper_on_input(uint16_t button, uint16_t type) {
 
 static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_flipperzero)},
-    {MP_ROM_QSTR(MP_QSTR_quit), MP_ROM_PTR(&flipperzero_quit_obj)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_RED), MP_ROM_INT(MP_FLIPPER_LED_RED)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_GREEN), MP_ROM_INT(MP_FLIPPER_LED_GREEN)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_BLUE), MP_ROM_INT(MP_FLIPPER_LED_BLUE)},
@@ -244,10 +299,19 @@ static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_speaker_stop), MP_ROM_PTR(&flipperzero_speaker_stop_obj)},
     {MP_ROM_QSTR(MP_QSTR_CANVAS_BLACK), MP_ROM_INT(MP_FLIPPER_COLOR_BLACK)},
     {MP_ROM_QSTR(MP_QSTR_CANVAS_WHITE), MP_ROM_INT(MP_FLIPPER_COLOR_WHITE)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_width), MP_ROM_PTR(&flipperzero_canvas_width_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_height), MP_ROM_PTR(&flipperzero_canvas_height_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_text_width), MP_ROM_PTR(&flipperzero_canvas_text_width_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_text_height), MP_ROM_PTR(&flipperzero_canvas_text_height_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_draw_dot), MP_ROM_PTR(&flipperzero_canvas_draw_dot_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_draw_box), MP_ROM_PTR(&flipperzero_canvas_draw_box_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_draw_frame), MP_ROM_PTR(&flipperzero_canvas_draw_frame_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_draw_line), MP_ROM_PTR(&flipperzero_canvas_draw_line_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_draw_circle), MP_ROM_PTR(&flipperzero_canvas_draw_circle_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_draw_disc), MP_ROM_PTR(&flipperzero_canvas_draw_disc_obj)},
+    {MP_ROM_QSTR(MP_QSTR_CANVAS_FONT_PRIMARY), MP_ROM_INT(MP_FLIPPER_CANVAS_FONT_PRIMARY)},
+    {MP_ROM_QSTR(MP_QSTR_CANVAS_FONT_SECONDARY), MP_ROM_INT(MP_FLIPPER_CANVAS_FONT_SECONDARY)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_set_font), MP_ROM_PTR(&flipperzero_canvas_set_font_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_set_color), MP_ROM_PTR(&flipperzero_canvas_set_color_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_set_text), MP_ROM_PTR(&flipperzero_canvas_set_text_obj)},
     {MP_ROM_QSTR(MP_QSTR_CANVAS_ALIGN_BEGIN), MP_ROM_INT(MP_FLIPPER_CANVAS_ALIGN_BEGIN)},

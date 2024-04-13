@@ -60,7 +60,7 @@ typedef long mp_off_t;
 #define MICROPY_ENABLE_EXTERNAL_IMPORT (1)
 #define MICROPY_READER_VFS (1)
 
-#define MICROPY_ENABLE_VM_ABORT (1)
+#define MICROPY_ENABLE_VM_ABORT (0)
 
 #define MICROPY_PY_ERRNO (0)
 #define MICROPY_USE_INTERNAL_ERRNO (0)
