@@ -2,6 +2,7 @@
 
 #include "py/compile.h"
 #include "py/runtime.h"
+#include "py/obj.h"
 #include "py/persistentcode.h"
 #include "py/gc.h"
 #include "py/stackctrl.h"
@@ -97,3 +98,7 @@ void mp_flipper_raise_os_error(int error) {
 void mp_flipper_raise_os_error_with_filename(int error, const char* filename) {
     mp_raise_OSError_with_filename(error, filename);
 }
+
+MP_DEFINE_CONST_FUN_OBJ_0(mp_sched_vm_abort_obj_0, mp_sched_vm_abort);
+
+const void* mp_sched_vm_abort_obj = &mp_sched_vm_abort_obj_0;
