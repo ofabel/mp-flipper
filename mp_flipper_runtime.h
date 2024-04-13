@@ -8,6 +8,8 @@
 
 extern const char* mp_flipper_root_module_path;
 
+extern void* mp_flipper_context;
+
 void mp_flipper_set_root_module_path(const char* path);
 
 void mp_flipper_init(void* memory, size_t memory_size, size_t stack_size, void* stack_top);
@@ -24,3 +26,5 @@ size_t mp_flipper_print_get_data_length(void* data);
 void* mp_flipper_print_data_alloc();
 void mp_flipper_print_strn(void* data, const char* str, size_t length);
 void mp_flipper_print_data_free(void* data);
+void* mp_flipper_context_alloc();
+void mp_flipper_context_free(void* context);
