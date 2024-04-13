@@ -26,3 +26,6 @@ void mp_flipper_canvas_draw_dot(uint8_t x, uint8_t y);
 void mp_flipper_canvas_set_color(uint8_t color);
 void mp_flipper_canvas_set_text(uint8_t x, uint8_t y, const char* text);
 void mp_flipper_canvas_update();
+
+void mp_flipper_on_input_back();
+void mp_flipper_on_input_ok();

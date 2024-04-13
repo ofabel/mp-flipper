@@ -7,7 +7,8 @@
 
 #include "mp_flipper_modflipperzero.h"
 
-static void* mp_flipper_on_draw = NULL;
+static void* mp_flipper_on_input_back_callback = NULL;
+static void* mp_flipper_on_input_ok_callback = NULL;
 
 static mp_obj_t flipperzero_light_set(mp_obj_t light_obj, mp_obj_t brightness_obj) {
     mp_int_t light = mp_obj_get_int(light_obj);
@@ -120,6 +121,32 @@ static mp_obj_t flipperzero_canvas_update() {
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_update_obj, flipperzero_canvas_update);
 
+static mp_obj_t flipperzero_on_input_back(mp_obj_t callback_obj) {
+    mp_flipper_on_input_back_callback = callback_obj;
+
+    return callback_obj;
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_input_back_obj, flipperzero_on_input_back);
+
+static mp_obj_t flipperzero_on_input_ok(mp_obj_t callback_obj) {
+    mp_flipper_on_input_ok_callback = callback_obj;
+
+    return callback_obj;
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_input_ok_obj, flipperzero_on_input_ok);
+
+void mp_flipper_on_input_back() {
+    if(mp_flipper_on_input_back_callback != NULL) {
+        mp_sched_schedule(mp_flipper_on_input_back_callback, mp_const_none);
+    }
+}
+
+void mp_flipper_on_input_ok() {
+    if(mp_flipper_on_input_ok_callback != NULL) {
+        mp_sched_schedule(mp_flipper_on_input_ok_callback, mp_const_none);
+    }
+}
+
 static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_flipperzero)},
     {MP_ROM_QSTR(MP_QSTR_LIGHT_RED), MP_ROM_INT(MP_FLIPPER_LED_RED)},
@@ -140,6 +167,8 @@ static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_canvas_set_color), MP_ROM_PTR(&flipperzero_canvas_set_color_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_set_text), MP_ROM_PTR(&flipperzero_canvas_set_text_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_update), MP_ROM_PTR(&flipperzero_canvas_update_obj)},
+    {MP_ROM_QSTR(MP_QSTR_on_input_back), MP_ROM_PTR(&flipperzero_on_input_back_obj)},
+    {MP_ROM_QSTR(MP_QSTR_on_input_ok), MP_ROM_PTR(&flipperzero_on_input_ok_obj)},
 };
 static MP_DEFINE_CONST_DICT(flipperzero_module_globals, flipperzero_module_globals_table);
 
