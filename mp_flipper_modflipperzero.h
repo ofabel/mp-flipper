@@ -21,8 +21,8 @@
 
 #define MP_FLIPPER_INPUT_TYPE_PRESS (1 << 6)
 #define MP_FLIPPER_INPUT_TYPE_RELEASE (1 << 7)
-#define MP_FLIPPER_INPUT_TYPE_LONG (1 << 8)
-#define MP_FLIPPER_INPUT_TYPE_SHORT (1 << 9)
+#define MP_FLIPPER_INPUT_TYPE_SHORT (1 << 8)
+#define MP_FLIPPER_INPUT_TYPE_LONG (1 << 9)
 #define MP_FLIPPER_INPUT_TYPE ((1 << 10) - 1 - MP_FLIPPER_INPUT_BUTTON)
 
 void mp_flipper_light_set(uint8_t raw_light, uint8_t brightness);
