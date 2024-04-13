@@ -8,8 +8,8 @@
 #define MP_FLIPPER_LED_BLUE (1 << 2)
 #define MP_FLIPPER_LED_BACKLIGHT (1 << 3)
 
-#define MP_FLIPPER_COLOR_BLACK (1 << 0);
-#define MP_FLIPPER_COLOR_WHITE (1 << 1);
+#define MP_FLIPPER_COLOR_BLACK (1 << 0)
+#define MP_FLIPPER_COLOR_WHITE (1 << 1)
 
 void mp_flipper_light_set(uint8_t raw_light, uint8_t brightness);
 void mp_flipper_light_blink_start(uint8_t raw_light, uint8_t brightness, uint16_t on_time, uint16_t period);
