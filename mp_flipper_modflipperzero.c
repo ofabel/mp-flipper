@@ -109,7 +109,7 @@ static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_draw_obj, flipperzero_on_draw);
 
 static mp_obj_t flipperzero_on_draw_call(mp_obj_t _) {
     if(mp_flipper_on_draw != NULL) {
-        mp_call_function_0(mp_flipper_on_draw);
+        mp_call_function_1(mp_flipper_on_draw, mp_const_none);
     }
 
     mp_flipper_canvas_on_draw_end();
@@ -121,7 +121,7 @@ static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_draw_call_obj, flipperzero_on_dr
 void mp_flipper_canvas_on_draw() {
     mp_flipper_canvas_on_draw_begin();
 
-    mp_sched_schedule(flipperzero_on_draw_call, mp_const_none);
+    mp_sched_schedule(&flipperzero_on_draw_call, mp_const_none);
 }
 
 static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
