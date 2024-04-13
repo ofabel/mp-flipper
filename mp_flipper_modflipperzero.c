@@ -7,8 +7,12 @@
 
 #include "mp_flipper_modflipperzero.h"
 
-static void* mp_flipper_on_input_back_callback = NULL;
-static void* mp_flipper_on_input_ok_callback = NULL;
+typedef struct {
+    uint8_t button;
+    uint8_t type;
+} on_input_arg_t;
+
+static void* mp_flipper_on_input_callback = NULL;
 
 static mp_obj_t flipperzero_light_set(mp_obj_t light_obj, mp_obj_t brightness_obj) {
     mp_int_t light = mp_obj_get_int(light_obj);
@@ -121,29 +125,40 @@ static mp_obj_t flipperzero_canvas_update() {
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_update_obj, flipperzero_canvas_update);
 
-static mp_obj_t flipperzero_on_input_back(mp_obj_t callback_obj) {
-    mp_flipper_on_input_back_callback = callback_obj;
+static mp_obj_t flipperzero_canvas_clear() {
+    mp_flipper_canvas_clear();
+
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_canvas_clear_obj, flipperzero_canvas_clear);
+
+static mp_obj_t flipperzero_on_input(mp_obj_t callback_obj) {
+    mp_flipper_on_input_callback = callback_obj;
 
     return callback_obj;
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_input_back_obj, flipperzero_on_input_back);
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_input_obj, flipperzero_on_input);
 
-static mp_obj_t flipperzero_on_input_ok(mp_obj_t callback_obj) {
-    mp_flipper_on_input_ok_callback = callback_obj;
+static mp_obj_t flipperzero_input_trigger_handler(mp_obj_t flags_obj) {
+    if(mp_flipper_on_input_callback != NULL) {
+        mp_int_t flags = mp_obj_get_int(flags_obj);
 
-    return callback_obj;
-}
-static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_on_input_ok_obj, flipperzero_on_input_ok);
+        mp_obj_t button_obj = mp_obj_new_int(flags & MP_FLIPPER_INPUT_BUTTON);
+        mp_obj_t type_obj = mp_obj_new_int(flags & MP_FLIPPER_INPUT_TYPE);
 
-void mp_flipper_on_input_back() {
-    if(mp_flipper_on_input_back_callback != NULL) {
-        mp_sched_schedule(mp_flipper_on_input_back_callback, mp_const_none);
+        mp_call_function_2_protected(mp_flipper_on_input_callback, button_obj, type_obj);
     }
-}
 
-void mp_flipper_on_input_ok() {
-    if(mp_flipper_on_input_ok_callback != NULL) {
-        mp_sched_schedule(mp_flipper_on_input_ok_callback, mp_const_none);
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_1(flipperzero_input_trigger_handler_obj, flipperzero_input_trigger_handler);
+
+void mp_flipper_on_input(uint16_t button, uint16_t type) {
+    if(mp_flipper_on_input_callback != NULL) {
+        uint16_t flags = button | type;
+        mp_obj_t flags_obj = mp_obj_new_int_from_uint(flags);
+
+        mp_sched_schedule(&flipperzero_input_trigger_handler_obj, flags_obj);
     }
 }
 
@@ -167,8 +182,20 @@ static const mp_rom_map_elem_t flipperzero_module_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_canvas_set_color), MP_ROM_PTR(&flipperzero_canvas_set_color_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_set_text), MP_ROM_PTR(&flipperzero_canvas_set_text_obj)},
     {MP_ROM_QSTR(MP_QSTR_canvas_update), MP_ROM_PTR(&flipperzero_canvas_update_obj)},
-    {MP_ROM_QSTR(MP_QSTR_on_input_back), MP_ROM_PTR(&flipperzero_on_input_back_obj)},
-    {MP_ROM_QSTR(MP_QSTR_on_input_ok), MP_ROM_PTR(&flipperzero_on_input_ok_obj)},
+    {MP_ROM_QSTR(MP_QSTR_canvas_clear), MP_ROM_PTR(&flipperzero_canvas_clear_obj)},
+    {MP_ROM_QSTR(MP_QSTR_on_input), MP_ROM_PTR(&flipperzero_on_input_obj)},
+    {MP_ROM_QSTR(MP_QSTR__input_trigger_handler), MP_ROM_PTR(&flipperzero_input_trigger_handler_obj)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_BUTTON_BACK), MP_ROM_INT(MP_FLIPPER_INPUT_BUTTON_BACK)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_BUTTON_OK), MP_ROM_INT(MP_FLIPPER_INPUT_BUTTON_OK)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_BUTTON_LEFT), MP_ROM_INT(MP_FLIPPER_INPUT_BUTTON_LEFT)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_BUTTON_RIGHT), MP_ROM_INT(MP_FLIPPER_INPUT_BUTTON_RIGHT)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_BUTTON_UP), MP_ROM_INT(MP_FLIPPER_INPUT_BUTTON_UP)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_BUTTON_DOWN), MP_ROM_INT(MP_FLIPPER_INPUT_BUTTON_DOWN)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_TYPE_PRESS), MP_ROM_INT(MP_FLIPPER_INPUT_TYPE_PRESS)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_TYPE_RELEASE), MP_ROM_INT(MP_FLIPPER_INPUT_TYPE_RELEASE)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_TYPE_SHORT), MP_ROM_INT(MP_FLIPPER_INPUT_TYPE_SHORT)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_TYPE_LONG), MP_ROM_INT(MP_FLIPPER_INPUT_TYPE_LONG)},
+    {MP_ROM_QSTR(MP_QSTR_INPUT_TYPE_REPEAT), MP_ROM_INT(MP_FLIPPER_INPUT_TYPE_REPEAT)},
 };
 static MP_DEFINE_CONST_DICT(flipperzero_module_globals, flipperzero_module_globals_table);
 

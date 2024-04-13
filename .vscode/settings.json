@@ -42,6 +42,7 @@
     "mp_flipper_compiler.h": "c",
     "mp_flipper_runtime.h": "c",
     "unicode.h": "c",
-    "pystack.h": "c"
+    "pystack.h": "c",
+    "stdbool.h": "c"
   }
 }
