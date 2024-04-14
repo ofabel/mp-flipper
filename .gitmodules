@@ -1,3 +1,4 @@
 [submodule "lib/micropython"]
 	path = lib/micropython
-	url = https://github.com/micropython/micropython.git
+	url = https://github.com/ofabel/mp-flipper.git
+	branch = lib-release
