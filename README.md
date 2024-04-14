@@ -36,7 +36,7 @@ make launch
 
 ## Install
 
-To install a [release](https://github.com/ofabel/mp-flipper/releases) by hand, just copy the `mp_flipper_app.fap` file on the SD card of your flipper (e.g. using the [qFlipper](https://flipperzero.one/downloads) app):
+To install a [release](https://github.com/ofabel/mp-flipper/releases) by hand, just copy the `mp_flipper_app.fap` file on the SD card of your Flipper (e.g. using the [qFlipper](https://flipperzero.one/downloads) app):
 
 ![](./assets/qflipper.png)
 
@@ -64,6 +64,6 @@ If this happens, just try again (the crash doesn't harm your device).
 
 **This is still work in progress, but already more than just a proof of concept.**
 
-There is no documentation of the `flipperzero` module.
-Just checkout the [examples](./examples/) for the syntax.
+There is no documentation of the `flipperzero` module yet.
+So just checkout the [examples](./examples/) for the syntax.
 Sadly, REPL support is only available in fhe [firmware fork](https://github.com/ofabel/flipperzero-firmware) version.
