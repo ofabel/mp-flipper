@@ -83,7 +83,7 @@ typedef long mp_off_t;
 #define MICROPY_PY_TIME_TIME_TIME_NS (1)
 
 #define MICROPY_PY_RANDOM (1)
-#define MICROPY_PY_RANDOM_EXTRA_FUNCS (0)
+#define MICROPY_PY_RANDOM_EXTRA_FUNCS (1)
 
 #define MICROPY_PY_RANDOM_SEED_INIT_FUNC (mp_flipper_seed_init())
 
@@ -138,3 +138,4 @@ typedef long mp_off_t;
 #define MICROPY_PY_CRYPTOLIB (0)
 #define MICROPY_PY_VFS (0)
 #define MICROPY_ENABLE_SCHEDULER (1)
+#define MICROPY_MODULE_BUILTIN_INIT (1)
