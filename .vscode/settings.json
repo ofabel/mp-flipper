@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "py_app.h": "c",
+    "mp_flipper_app.h": "c",
+    "mp_flipper_runtime.h": "c",
+    "mp_flipper_compiler.h": "c",
+    "system_error": "c",
+    "cmath": "c",
+    "bit": "c",
+    "*.tcc": "c",
+    "random": "c",
+    "typeinfo": "c"
+  }
+}

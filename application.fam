@@ -19,7 +19,7 @@ App(
     ],
     fap_private_libs=[
         Lib(
-            name="micropython-build",
+            name="micropython",
             cflags=[
                 "-Wno-error",
                 "-w",
