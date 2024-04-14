@@ -1,17 +1,14 @@
-# For details & more options, see documentation/AppManifests.md in firmware repo
-
 App(
-    appid="mp_flipper_app",  # Must be unique
-    name="uPython",  # Displayed in menus
+    appid="mp_flipper_app",
+    name="uPython",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="mp_flipper_app",
     stack_size=4 * 1024,
     fap_category="Examples",
-    fap_icon="icon.png",  # 10x10 1-bit PNG
+    fap_icon="icon.png",
     fap_author="Oliver Fabel",
     fap_file_assets="examples",
-    # fap_weburl="https://github.com/user/funky_flipper_app",
-    # fap_icon_assets="images",  # Image assets to compile for this application
+    fap_weburl="https://github.com/ofabel/mp-flipper",
     cdefines=[
         "MP_FLIPPER_RUNTIME",
         "MP_FLIPPER_COMPILER",
@@ -20,6 +17,7 @@ App(
     sources=[
         "*.c*",
         "!./lib/micropython",
+        "!./lib/micropython-port",
     ],
     fap_private_libs=[
         Lib(
