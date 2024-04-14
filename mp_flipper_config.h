@@ -1,3 +1,10 @@
+// Need to provide a declaration/definition of alloca()
+#if defined(__FreeBSD__) || defined(__NetBSD__)
+#include <stdlib.h>
+#else
+#include <alloca.h>
+#endif
+
 #include <stdint.h>
 
 #ifndef MP_FLIPPER_IS_COMPILER
@@ -17,24 +24,32 @@
 #endif
 
 // Type definitions for the specific machine
-
 typedef int32_t mp_int_t; // must be pointer size
 typedef uint32_t mp_uint_t; // must be pointer size
 typedef long mp_off_t;
 
-// Need to provide a declaration/definition of alloca()
-#if defined(__FreeBSD__) || defined(__NetBSD__)
-#include <stdlib.h>
-#else
-#include <alloca.h>
+#ifdef MP_FLIPPER_SPLIT_HEAP
+#define MICROPY_GC_SPLIT_HEAP (1)
+#define MICROPY_GC_SPLIT_HEAP_AUTO (1)
 #endif
 
 #define MICROPY_MPHALPORT_H "mp_flipper_halport.h"
 
+#define MICROPY_MIN_USE_CORTEX_CPU (1)
+#define MICROPY_MIN_USE_STM32_MCU (1)
+
+#define MICROPY_HW_BOARD_NAME "Flipper Zero"
+#define MICROPY_HW_MCU_NAME "STM32WB55RG"
+
 #define MICROPY_CONFIG_ROM_LEVEL (MICROPY_CONFIG_ROM_LEVEL_CORE_FEATURES)
 
+#ifdef MP_FLIPPER_MPY_SUPPORT
 #define MICROPY_PERSISTENT_CODE_LOAD (MP_FLIPPER_IS_RUNTIME)
 #define MICROPY_PERSISTENT_CODE_SAVE (MP_FLIPPER_IS_COMPILER)
+#else
+#define MICROPY_PERSISTENT_CODE_LOAD (0)
+#define MICROPY_PERSISTENT_CODE_SAVE (0)
+#endif
 #define MICROPY_PERSISTENT_CODE_SAVE_FILE (0)
 
 #define MICROPY_ENABLE_COMPILER (MP_FLIPPER_IS_COMPILER)
@@ -46,15 +61,13 @@ typedef long mp_off_t;
 
 #define MICROPY_ENABLE_FINALISER (0)
 
+#ifndef MP_FLIPPER_FIRMWARE
+#define MICROPY_ERROR_REPORTING (MICROPY_ERROR_REPORTING_NONE)
+#else
 #define MICROPY_ERROR_REPORTING (MICROPY_ERROR_REPORTING_TERSE)
+#endif
 
 #define MICROPY_GC_STACK_ENTRY_TYPE uint32_t
-
-#define MICROPY_MIN_USE_CORTEX_CPU (1)
-#define MICROPY_MIN_USE_STM32_MCU (1)
-
-#define MICROPY_HW_BOARD_NAME "Flipper Zero"
-#define MICROPY_HW_MCU_NAME "STM32WB55RG"
 
 #define MICROPY_PY___FILE__ (1)
 #define MICROPY_ENABLE_EXTERNAL_IMPORT (1)
