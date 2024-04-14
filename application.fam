@@ -12,6 +12,10 @@ App(
     fap_file_assets="examples",
     # fap_weburl="https://github.com/user/funky_flipper_app",
     # fap_icon_assets="images",  # Image assets to compile for this application
+    cdefines=[
+        "MP_FLIPPER_RUNTIME",
+        "MP_FLIPPER_COMPILER",
+    ],
     sources=[
         "*.c*",
         "!./lib/micropython",
@@ -19,6 +23,10 @@ App(
     fap_private_libs=[
         Lib(
             name="micropython",
+            cdefines=[
+                "MP_FLIPPER_RUNTIME",
+                "MP_FLIPPER_COMPILER",
+            ],
             cflags=[
                 "-Wno-error",
                 "-w",
@@ -36,6 +44,10 @@ App(
         ),
         Lib(
             name="micropython-port",
+            cdefines=[
+                "MP_FLIPPER_RUNTIME",
+                "MP_FLIPPER_COMPILER",
+            ],
             cflags=[
                 "-Wno-error",
                 "-w",
