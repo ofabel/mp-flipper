@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Library to include in firmware repository.
-* All generated files from the build prozess are now part of the repository
+* [Library](https://github.com/ofabel/mp-flipper/tree/lib) to include in the [firmware repository](https://github.com/ofabel/flipperzero-firmware).
+* All generated files from the build prozess are now [part of the repository](https://github.com/ofabel/mp-flipper/tree/lib-release).
 
 ### Removed
 
