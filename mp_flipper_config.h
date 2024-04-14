@@ -1,3 +1,10 @@
+// Need to provide a declaration/definition of alloca()
+#if defined(__FreeBSD__) || defined(__NetBSD__)
+#include <stdlib.h>
+#else
+#include <alloca.h>
+#endif
+
 #include <stdint.h>
 
 #ifndef MP_FLIPPER_IS_COMPILER
@@ -17,16 +24,13 @@
 #endif
 
 // Type definitions for the specific machine
-
 typedef int32_t mp_int_t; // must be pointer size
 typedef uint32_t mp_uint_t; // must be pointer size
 typedef long mp_off_t;
 
-// Need to provide a declaration/definition of alloca()
-#if defined(__FreeBSD__) || defined(__NetBSD__)
-#include <stdlib.h>
-#else
-#include <alloca.h>
+#ifdef MP_FLIPPER_SPLIT_HEAP
+#define MICROPY_GC_SPLIT_HEAP (1)
+#define MICROPY_GC_SPLIT_HEAP_AUTO (1)
 #endif
 
 #define MICROPY_MPHALPORT_H "mp_flipper_halport.h"
