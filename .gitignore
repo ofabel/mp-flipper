@@ -1,4 +1,6 @@
-/build-embed/
-/lib/micropython-build/
-/compile_flags.txt
-*.kate-swp
+dist/*
+.vscode
+.clang-format
+.editorconfig
+.env
+.ufbt

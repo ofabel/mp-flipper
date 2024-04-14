@@ -14,7 +14,6 @@ App(
     # fap_icon_assets="images",  # Image assets to compile for this application
     sources=[
         "*.c*",
-        "!./build-embed",
         "!./lib/micropython",
     ],
     fap_private_libs=[
