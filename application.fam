@@ -15,6 +15,7 @@ App(
     cdefines=[
         "MP_FLIPPER_RUNTIME",
         "MP_FLIPPER_COMPILER",
+        "MP_FLIPPER_SPLIT_HEAP",
     ],
     sources=[
         "*.c*",
@@ -26,6 +27,7 @@ App(
             cdefines=[
                 "MP_FLIPPER_RUNTIME",
                 "MP_FLIPPER_COMPILER",
+                "MP_FLIPPER_SPLIT_HEAP",
             ],
             cflags=[
                 "-Wno-error",
@@ -47,6 +49,7 @@ App(
             cdefines=[
                 "MP_FLIPPER_RUNTIME",
                 "MP_FLIPPER_COMPILER",
+                "MP_FLIPPER_SPLIT_HEAP",
             ],
             cflags=[
                 "-Wno-error",

@@ -27,3 +27,7 @@ inline mp_flipper_import_stat_t mp_flipper_import_stat(const char* path) {
 
     return stat;
 }
+
+size_t gc_get_max_new_split(void) {
+    return memmgr_heap_get_max_free_block();
+}
