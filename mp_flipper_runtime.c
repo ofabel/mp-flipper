@@ -30,6 +30,7 @@ void mp_flipper_init(void* heap, size_t heap_size, size_t stack_size, void* stac
 }
 
 void mp_flipper_exec_mpy_file(const char* file_path) {
+#ifdef MP_FLIPPER_MPY_SUPPORT
 #if MP_FLIPPER_IS_RUNTIME
     nlr_buf_t nlr;
 
@@ -56,6 +57,7 @@ void mp_flipper_exec_mpy_file(const char* file_path) {
         // Uncaught exception: print it out.
         mp_obj_print_exception(&mp_plat_print, (mp_obj_t)nlr.ret_val);
     }
+#endif
 #endif
 }
 
