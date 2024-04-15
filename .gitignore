@@ -1,3 +1,8 @@
 /build-embed/
 /build/
+/py/
+/extmod/
+/genhdr/
+/shared/
+/mpconfigport.h
 *.kate-swp

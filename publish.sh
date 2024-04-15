@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-readonly BRANCH='lib-release'
+readonly BRANCH="${1}"
 readonly TARGET='./temp'
 
 set -e
