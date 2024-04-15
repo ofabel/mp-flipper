@@ -43,6 +43,3 @@ publish-firmware: clear _init-firmware _build
 .PHONY: publish-fap
 publish-fap: clear _init-fap _build
 	./publish.sh lib-release-fap
-
-.PHONY: publish
-publish: publish-firmware publish-fap
