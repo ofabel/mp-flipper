@@ -34,7 +34,7 @@ build-firmware: clear _init-firmware _build
 
 .PHONY: clear
 clear: clean
-	rm -rf ./extmod ./genhdr ./py ./shared
+	rm -rf ./extmod ./genhdr ./py ./shared ./mpconfigport.h
 
 .PHONY: publish-firmware
 publish-firmware: clear _init-firmware _build

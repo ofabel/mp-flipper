@@ -4,5 +4,5 @@
 /extmod/
 /genhdr/
 /shared/
-/mpconfigport.h
+mpconfigport.h
 *.kate-swp
