@@ -4,14 +4,6 @@ extern const struct _mp_obj_module_t mp_module_array;
 #undef MODULE_DEF_ARRAY
 #define MODULE_DEF_ARRAY { MP_ROM_QSTR(MP_QSTR_array), MP_ROM_PTR(&mp_module_array) },
 
-extern const struct _mp_obj_module_t mp_module_io;
-#undef MODULE_DEF_IO
-#define MODULE_DEF_IO { MP_ROM_QSTR(MP_QSTR_io), MP_ROM_PTR(&mp_module_io) },
-
-extern const struct _mp_obj_module_t mp_module_json;
-#undef MODULE_DEF_JSON
-#define MODULE_DEF_JSON { MP_ROM_QSTR(MP_QSTR_json), MP_ROM_PTR(&mp_module_json) },
-
 extern const struct _mp_obj_module_t mp_module_random;
 #undef MODULE_DEF_RANDOM
 #define MODULE_DEF_RANDOM { MP_ROM_QSTR(MP_QSTR_random), MP_ROM_PTR(&mp_module_random) },
@@ -36,10 +28,6 @@ extern const struct _mp_obj_module_t mp_module_gc;
 #undef MODULE_DEF_GC
 #define MODULE_DEF_GC { MP_ROM_QSTR(MP_QSTR_gc), MP_ROM_PTR(&mp_module_gc) },
 
-extern const struct _mp_obj_module_t mp_module_math;
-#undef MODULE_DEF_MATH
-#define MODULE_DEF_MATH { MP_ROM_QSTR(MP_QSTR_math), MP_ROM_PTR(&mp_module_math) },
-
 extern const struct _mp_obj_module_t mp_module_micropython;
 #undef MODULE_DEF_MICROPYTHON
 #define MODULE_DEF_MICROPYTHON { MP_ROM_QSTR(MP_QSTR_micropython), MP_ROM_PTR(&mp_module_micropython) },
@@ -49,15 +37,12 @@ extern const struct _mp_obj_module_t mp_module_micropython;
     MODULE_DEF_BUILTINS \
     MODULE_DEF_FLIPPERZERO \
     MODULE_DEF_GC \
-    MODULE_DEF_MATH \
     MODULE_DEF_MICROPYTHON \
     MODULE_DEF___MAIN__ \
 // MICROPY_REGISTERED_MODULES
 
 #define MICROPY_REGISTERED_EXTENSIBLE_MODULES \
     MODULE_DEF_ARRAY \
-    MODULE_DEF_IO \
-    MODULE_DEF_JSON \
     MODULE_DEF_RANDOM \
     MODULE_DEF_TIME \
 // MICROPY_REGISTERED_EXTENSIBLE_MODULES
