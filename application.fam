@@ -11,11 +11,6 @@ App(
     fap_author="Oliver Fabel",
     fap_file_assets="examples",
     fap_weburl="https://github.com/ofabel/mp-flipper",
-    cdefines=[
-        "MP_FLIPPER_RUNTIME",
-        "MP_FLIPPER_COMPILER",
-        "MP_FLIPPER_SPLIT_HEAP",
-    ],
     sources=[
         "*.c*",
         "!./lib/micropython",
@@ -24,11 +19,6 @@ App(
     fap_private_libs=[
         Lib(
             name="micropython",
-            cdefines=[
-                "MP_FLIPPER_RUNTIME",
-                "MP_FLIPPER_COMPILER",
-                "MP_FLIPPER_SPLIT_HEAP",
-            ],
             cflags=[
                 "-Wno-error",
                 "-w",
@@ -46,11 +36,6 @@ App(
         ),
         Lib(
             name="micropython-port",
-            cdefines=[
-                "MP_FLIPPER_RUNTIME",
-                "MP_FLIPPER_COMPILER",
-                "MP_FLIPPER_SPLIT_HEAP",
-            ],
             cflags=[
                 "-Wno-error",
                 "-w",
