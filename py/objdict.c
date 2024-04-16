@@ -49,12 +49,12 @@ const mp_obj_dict_t mp_const_empty_dict_obj = {
     }
 };
 
-static mp_obj_t dict_update(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs);
+STATIC mp_obj_t dict_update(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs);
 
 // This is a helper function to iterate through a dictionary.  The state of
 // the iteration is held in *cur and should be initialised with zero for the
 // first call.  Will return NULL when no more elements are available.
-static mp_map_elem_t *dict_iter_next(mp_obj_dict_t *dict, size_t *cur) {
+STATIC mp_map_elem_t *dict_iter_next(mp_obj_dict_t *dict, size_t *cur) {
     size_t max = dict->map.alloc;
     mp_map_t *map = &dict->map;
 
@@ -70,7 +70,7 @@ static mp_map_elem_t *dict_iter_next(mp_obj_dict_t *dict, size_t *cur) {
     return NULL;
 }
 
-static void dict_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t kind) {
+STATIC void dict_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t kind) {
     mp_obj_dict_t *self = MP_OBJ_TO_PTR(self_in);
     bool first = true;
     const char *item_separator = ", ";
@@ -129,7 +129,7 @@ mp_obj_t mp_obj_dict_make_new(const mp_obj_type_t *type, size_t n_args, size_t n
     return dict_out;
 }
 
-static mp_obj_t dict_unary_op(mp_unary_op_t op, mp_obj_t self_in) {
+STATIC mp_obj_t dict_unary_op(mp_unary_op_t op, mp_obj_t self_in) {
     mp_obj_dict_t *self = MP_OBJ_TO_PTR(self_in);
     switch (op) {
         case MP_UNARY_OP_BOOL:
@@ -147,7 +147,7 @@ static mp_obj_t dict_unary_op(mp_unary_op_t op, mp_obj_t self_in) {
     }
 }
 
-static mp_obj_t dict_binary_op(mp_binary_op_t op, mp_obj_t lhs_in, mp_obj_t rhs_in) {
+STATIC mp_obj_t dict_binary_op(mp_binary_op_t op, mp_obj_t lhs_in, mp_obj_t rhs_in) {
     mp_obj_dict_t *o = MP_OBJ_TO_PTR(lhs_in);
     switch (op) {
         case MP_BINARY_OP_CONTAINS: {
@@ -218,7 +218,7 @@ mp_obj_t mp_obj_dict_get(mp_obj_t self_in, mp_obj_t index) {
     }
 }
 
-static mp_obj_t dict_subscr(mp_obj_t self_in, mp_obj_t index, mp_obj_t value) {
+STATIC mp_obj_t dict_subscr(mp_obj_t self_in, mp_obj_t index, mp_obj_t value) {
     if (value == MP_OBJ_NULL) {
         // delete
         mp_obj_dict_delete(self_in, index);
@@ -242,13 +242,13 @@ static mp_obj_t dict_subscr(mp_obj_t self_in, mp_obj_t index, mp_obj_t value) {
 /******************************************************************************/
 /* dict methods                                                               */
 
-static void mp_ensure_not_fixed(const mp_obj_dict_t *dict) {
+STATIC void mp_ensure_not_fixed(const mp_obj_dict_t *dict) {
     if (dict->map.is_fixed) {
         mp_raise_TypeError(NULL);
     }
 }
 
-static mp_obj_t dict_clear(mp_obj_t self_in) {
+STATIC mp_obj_t dict_clear(mp_obj_t self_in) {
     mp_check_self(mp_obj_is_dict_or_ordereddict(self_in));
     mp_obj_dict_t *self = MP_OBJ_TO_PTR(self_in);
     mp_ensure_not_fixed(self);
@@ -257,7 +257,7 @@ static mp_obj_t dict_clear(mp_obj_t self_in) {
 
     return mp_const_none;
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(dict_clear_obj, dict_clear);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(dict_clear_obj, dict_clear);
 
 mp_obj_t mp_obj_dict_copy(mp_obj_t self_in) {
     mp_check_self(mp_obj_is_dict_or_ordereddict(self_in));
@@ -272,11 +272,11 @@ mp_obj_t mp_obj_dict_copy(mp_obj_t self_in) {
     memcpy(other->map.table, self->map.table, self->map.alloc * sizeof(mp_map_elem_t));
     return other_out;
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(dict_copy_obj, mp_obj_dict_copy);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(dict_copy_obj, mp_obj_dict_copy);
 
 #if MICROPY_PY_BUILTINS_DICT_FROMKEYS
 // this is a classmethod
-static mp_obj_t dict_fromkeys(size_t n_args, const mp_obj_t *args) {
+STATIC mp_obj_t dict_fromkeys(size_t n_args, const mp_obj_t *args) {
     mp_obj_t iter = mp_getiter(args[1], NULL);
     mp_obj_t value = mp_const_none;
     mp_obj_t next = MP_OBJ_NULL;
@@ -302,11 +302,11 @@ static mp_obj_t dict_fromkeys(size_t n_args, const mp_obj_t *args) {
 
     return self_out;
 }
-static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_fromkeys_fun_obj, 2, 3, dict_fromkeys);
-static MP_DEFINE_CONST_CLASSMETHOD_OBJ(dict_fromkeys_obj, MP_ROM_PTR(&dict_fromkeys_fun_obj));
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_fromkeys_fun_obj, 2, 3, dict_fromkeys);
+STATIC MP_DEFINE_CONST_CLASSMETHOD_OBJ(dict_fromkeys_obj, MP_ROM_PTR(&dict_fromkeys_fun_obj));
 #endif
 
-static mp_obj_t dict_get_helper(size_t n_args, const mp_obj_t *args, mp_map_lookup_kind_t lookup_kind) {
+STATIC mp_obj_t dict_get_helper(size_t n_args, const mp_obj_t *args, mp_map_lookup_kind_t lookup_kind) {
     mp_check_self(mp_obj_is_dict_or_ordereddict(args[0]));
     mp_obj_dict_t *self = MP_OBJ_TO_PTR(args[0]);
     if (lookup_kind != MP_MAP_LOOKUP) {
@@ -336,22 +336,22 @@ static mp_obj_t dict_get_helper(size_t n_args, const mp_obj_t *args, mp_map_look
     return value;
 }
 
-static mp_obj_t dict_get(size_t n_args, const mp_obj_t *args) {
+STATIC mp_obj_t dict_get(size_t n_args, const mp_obj_t *args) {
     return dict_get_helper(n_args, args, MP_MAP_LOOKUP);
 }
-static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_get_obj, 2, 3, dict_get);
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_get_obj, 2, 3, dict_get);
 
-static mp_obj_t dict_pop(size_t n_args, const mp_obj_t *args) {
+STATIC mp_obj_t dict_pop(size_t n_args, const mp_obj_t *args) {
     return dict_get_helper(n_args, args, MP_MAP_LOOKUP_REMOVE_IF_FOUND);
 }
-static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_pop_obj, 2, 3, dict_pop);
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_pop_obj, 2, 3, dict_pop);
 
-static mp_obj_t dict_setdefault(size_t n_args, const mp_obj_t *args) {
+STATIC mp_obj_t dict_setdefault(size_t n_args, const mp_obj_t *args) {
     return dict_get_helper(n_args, args, MP_MAP_LOOKUP_ADD_IF_NOT_FOUND);
 }
-static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_setdefault_obj, 2, 3, dict_setdefault);
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(dict_setdefault_obj, 2, 3, dict_setdefault);
 
-static mp_obj_t dict_popitem(mp_obj_t self_in) {
+STATIC mp_obj_t dict_popitem(mp_obj_t self_in) {
     mp_check_self(mp_obj_is_dict_or_ordereddict(self_in));
     mp_obj_dict_t *self = MP_OBJ_TO_PTR(self_in);
     mp_ensure_not_fixed(self);
@@ -374,9 +374,9 @@ static mp_obj_t dict_popitem(mp_obj_t self_in) {
 
     return tuple;
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(dict_popitem_obj, dict_popitem);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(dict_popitem_obj, dict_popitem);
 
-static mp_obj_t dict_update(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) {
+STATIC mp_obj_t dict_update(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) {
     mp_check_self(mp_obj_is_dict_or_ordereddict(args[0]));
     mp_obj_dict_t *self = MP_OBJ_TO_PTR(args[0]);
     mp_ensure_not_fixed(self);
@@ -424,14 +424,14 @@ static mp_obj_t dict_update(size_t n_args, const mp_obj_t *args, mp_map_t *kwarg
 
     return mp_const_none;
 }
-static MP_DEFINE_CONST_FUN_OBJ_KW(dict_update_obj, 1, dict_update);
+STATIC MP_DEFINE_CONST_FUN_OBJ_KW(dict_update_obj, 1, dict_update);
 
 
 /******************************************************************************/
 /* dict views                                                                 */
 
-static const mp_obj_type_t mp_type_dict_view;
-static const mp_obj_type_t mp_type_dict_view_it;
+STATIC const mp_obj_type_t mp_type_dict_view;
+STATIC const mp_obj_type_t mp_type_dict_view_it;
 
 typedef enum _mp_dict_view_kind_t {
     MP_DICT_VIEW_ITEMS,
@@ -439,7 +439,7 @@ typedef enum _mp_dict_view_kind_t {
     MP_DICT_VIEW_VALUES,
 } mp_dict_view_kind_t;
 
-static const char *const mp_dict_view_names[] = {"dict_items", "dict_keys", "dict_values"};
+STATIC const char *const mp_dict_view_names[] = {"dict_items", "dict_keys", "dict_values"};
 
 typedef struct _mp_obj_dict_view_it_t {
     mp_obj_base_t base;
@@ -454,7 +454,7 @@ typedef struct _mp_obj_dict_view_t {
     mp_dict_view_kind_t kind;
 } mp_obj_dict_view_t;
 
-static mp_obj_t dict_view_it_iternext(mp_obj_t self_in) {
+STATIC mp_obj_t dict_view_it_iternext(mp_obj_t self_in) {
     mp_check_self(mp_obj_is_type(self_in, &mp_type_dict_view_it));
     mp_obj_dict_view_it_t *self = MP_OBJ_TO_PTR(self_in);
     mp_map_elem_t *next = dict_iter_next(MP_OBJ_TO_PTR(self->dict), &self->cur);
@@ -476,14 +476,14 @@ static mp_obj_t dict_view_it_iternext(mp_obj_t self_in) {
     }
 }
 
-static MP_DEFINE_CONST_OBJ_TYPE(
+STATIC MP_DEFINE_CONST_OBJ_TYPE(
     mp_type_dict_view_it,
     MP_QSTR_iterator,
     MP_TYPE_FLAG_ITER_IS_ITERNEXT,
     iter, dict_view_it_iternext
     );
 
-static mp_obj_t dict_view_getiter(mp_obj_t view_in, mp_obj_iter_buf_t *iter_buf) {
+STATIC mp_obj_t dict_view_getiter(mp_obj_t view_in, mp_obj_iter_buf_t *iter_buf) {
     assert(sizeof(mp_obj_dict_view_it_t) <= sizeof(mp_obj_iter_buf_t));
     mp_check_self(mp_obj_is_type(view_in, &mp_type_dict_view));
     mp_obj_dict_view_t *view = MP_OBJ_TO_PTR(view_in);
@@ -495,7 +495,7 @@ static mp_obj_t dict_view_getiter(mp_obj_t view_in, mp_obj_iter_buf_t *iter_buf)
     return MP_OBJ_FROM_PTR(o);
 }
 
-static void dict_view_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t kind) {
+STATIC void dict_view_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t kind) {
     (void)kind;
     mp_check_self(mp_obj_is_type(self_in, &mp_type_dict_view));
     mp_obj_dict_view_t *self = MP_OBJ_TO_PTR(self_in);
@@ -515,7 +515,7 @@ static void dict_view_print(const mp_print_t *print, mp_obj_t self_in, mp_print_
     mp_print_str(print, "])");
 }
 
-static mp_obj_t dict_view_unary_op(mp_unary_op_t op, mp_obj_t o_in) {
+STATIC mp_obj_t dict_view_unary_op(mp_unary_op_t op, mp_obj_t o_in) {
     mp_obj_dict_view_t *o = MP_OBJ_TO_PTR(o_in);
     // only dict.values() supports __hash__.
     if (op == MP_UNARY_OP_HASH && o->kind == MP_DICT_VIEW_VALUES) {
@@ -524,7 +524,7 @@ static mp_obj_t dict_view_unary_op(mp_unary_op_t op, mp_obj_t o_in) {
     return MP_OBJ_NULL;
 }
 
-static mp_obj_t dict_view_binary_op(mp_binary_op_t op, mp_obj_t lhs_in, mp_obj_t rhs_in) {
+STATIC mp_obj_t dict_view_binary_op(mp_binary_op_t op, mp_obj_t lhs_in, mp_obj_t rhs_in) {
     // only supported for the 'keys' kind until sets and dicts are refactored
     mp_obj_dict_view_t *o = MP_OBJ_TO_PTR(lhs_in);
     if (o->kind != MP_DICT_VIEW_KEYS) {
@@ -536,7 +536,7 @@ static mp_obj_t dict_view_binary_op(mp_binary_op_t op, mp_obj_t lhs_in, mp_obj_t
     return dict_binary_op(op, o->dict, rhs_in);
 }
 
-static MP_DEFINE_CONST_OBJ_TYPE(
+STATIC MP_DEFINE_CONST_OBJ_TYPE(
     mp_type_dict_view,
     MP_QSTR_dict_view,
     MP_TYPE_FLAG_ITER_IS_GETITER,
@@ -546,37 +546,37 @@ static MP_DEFINE_CONST_OBJ_TYPE(
     iter, dict_view_getiter
     );
 
-static mp_obj_t mp_obj_new_dict_view(mp_obj_t dict, mp_dict_view_kind_t kind) {
+STATIC mp_obj_t mp_obj_new_dict_view(mp_obj_t dict, mp_dict_view_kind_t kind) {
     mp_obj_dict_view_t *o = mp_obj_malloc(mp_obj_dict_view_t, &mp_type_dict_view);
     o->dict = dict;
     o->kind = kind;
     return MP_OBJ_FROM_PTR(o);
 }
 
-static mp_obj_t dict_view(mp_obj_t self_in, mp_dict_view_kind_t kind) {
+STATIC mp_obj_t dict_view(mp_obj_t self_in, mp_dict_view_kind_t kind) {
     mp_check_self(mp_obj_is_dict_or_ordereddict(self_in));
     return mp_obj_new_dict_view(self_in, kind);
 }
 
-static mp_obj_t dict_items(mp_obj_t self_in) {
+STATIC mp_obj_t dict_items(mp_obj_t self_in) {
     return dict_view(self_in, MP_DICT_VIEW_ITEMS);
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(dict_items_obj, dict_items);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(dict_items_obj, dict_items);
 
-static mp_obj_t dict_keys(mp_obj_t self_in) {
+STATIC mp_obj_t dict_keys(mp_obj_t self_in) {
     return dict_view(self_in, MP_DICT_VIEW_KEYS);
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(dict_keys_obj, dict_keys);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(dict_keys_obj, dict_keys);
 
-static mp_obj_t dict_values(mp_obj_t self_in) {
+STATIC mp_obj_t dict_values(mp_obj_t self_in) {
     return dict_view(self_in, MP_DICT_VIEW_VALUES);
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(dict_values_obj, dict_values);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(dict_values_obj, dict_values);
 
 /******************************************************************************/
 /* dict iterator                                                              */
 
-static mp_obj_t dict_getiter(mp_obj_t self_in, mp_obj_iter_buf_t *iter_buf) {
+STATIC mp_obj_t dict_getiter(mp_obj_t self_in, mp_obj_iter_buf_t *iter_buf) {
     assert(sizeof(mp_obj_dict_view_it_t) <= sizeof(mp_obj_iter_buf_t));
     mp_check_self(mp_obj_is_dict_or_ordereddict(self_in));
     mp_obj_dict_view_it_t *o = (mp_obj_dict_view_it_t *)iter_buf;
@@ -590,7 +590,7 @@ static mp_obj_t dict_getiter(mp_obj_t self_in, mp_obj_iter_buf_t *iter_buf) {
 /******************************************************************************/
 /* dict constructors & public C API                                           */
 
-static const mp_rom_map_elem_t dict_locals_dict_table[] = {
+STATIC const mp_rom_map_elem_t dict_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_clear), MP_ROM_PTR(&dict_clear_obj) },
     { MP_ROM_QSTR(MP_QSTR_copy), MP_ROM_PTR(&dict_copy_obj) },
     #if MICROPY_PY_BUILTINS_DICT_FROMKEYS
@@ -609,7 +609,7 @@ static const mp_rom_map_elem_t dict_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR___delitem__), MP_ROM_PTR(&mp_op_delitem_obj) },
 };
 
-static MP_DEFINE_CONST_DICT(dict_locals_dict, dict_locals_dict_table);
+STATIC MP_DEFINE_CONST_DICT(dict_locals_dict, dict_locals_dict_table);
 
 MP_DEFINE_CONST_OBJ_TYPE(
     mp_type_dict,

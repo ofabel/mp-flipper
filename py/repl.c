@@ -43,7 +43,7 @@ const char *mp_repl_get_psx(unsigned int entry) {
 }
 #endif
 
-static bool str_startswith_word(const char *str, const char *head) {
+STATIC bool str_startswith_word(const char *str, const char *head) {
     size_t i;
     for (i = 0; str[i] && head[i]; i++) {
         if (str[i] != head[i]) {
@@ -154,7 +154,7 @@ bool mp_repl_continue_with_input(const char *input) {
     return false;
 }
 
-static bool test_qstr(mp_obj_t obj, qstr name) {
+STATIC bool test_qstr(mp_obj_t obj, qstr name) {
     if (obj) {
         // try object member
         mp_obj_t dest[2];
@@ -167,7 +167,7 @@ static bool test_qstr(mp_obj_t obj, qstr name) {
     }
 }
 
-static const char *find_completions(const char *s_start, size_t s_len,
+STATIC const char *find_completions(const char *s_start, size_t s_len,
     mp_obj_t obj, size_t *match_len, qstr *q_first, qstr *q_last) {
 
     const char *match_str = NULL;
@@ -207,7 +207,7 @@ static const char *find_completions(const char *s_start, size_t s_len,
     return match_str;
 }
 
-static void print_completions(const mp_print_t *print,
+STATIC void print_completions(const mp_print_t *print,
     const char *s_start, size_t s_len,
     mp_obj_t obj, qstr q_first, qstr q_last) {
 

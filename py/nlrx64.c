@@ -123,7 +123,7 @@ NORETURN void nlr_jump(void *val) {
         "ret                        \n" // return
         :                           // output operands
         : "r" (top)                 // input operands
-        : "memory"                  // clobbered registers
+        :                           // clobbered registers
         );
 
     MP_UNREACHABLE
