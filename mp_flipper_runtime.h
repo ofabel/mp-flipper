@@ -4,7 +4,7 @@
 
 #include "py/mperrno.h"
 
-#include "mp_flipper_config.h"
+#include "mpconfigport.h"
 
 extern const char* mp_flipper_root_module_path;
 
