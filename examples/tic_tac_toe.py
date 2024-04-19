@@ -60,7 +60,7 @@ def draw_grid():
 
   f0.canvas_draw_frame(px, py, 16, 16)
   
-  f0.canvas_set_text_align(f0.CANVAS_ALIGN_CENTER, f0.CANVAS_ALIGN_CENTER)
+  f0.canvas_set_text_align(f0.ALIGN_CENTER, f0.ALIGN_CENTER)
 
   for x in range(0, 3):
     for y in range(0, 3):

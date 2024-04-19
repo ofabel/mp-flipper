@@ -67,3 +67,4 @@ void mp_flipper_dialog_message_set_text(const char* text, uint8_t x, uint8_t y, 
 void mp_flipper_dialog_message_set_header(const char* text, uint8_t x, uint8_t y, uint8_t h, uint8_t v);
 void mp_flipper_dialog_message_set_button(const char* text, uint8_t button);
 uint8_t mp_flipper_dialog_message_show();
+void mp_flipper_dialog_message_clear();
