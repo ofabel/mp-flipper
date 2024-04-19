@@ -301,7 +301,7 @@ static mp_obj_t flipperzero_dialog_message_set_text(size_t n_args, const mp_obj_
 }
 static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(flipperzero_dialog_message_set_text_obj, 3, 5, flipperzero_dialog_message_set_text);
 
-static mp_obj_t flipperzero_dialog_message_set_text(size_t n_args, const mp_obj_t* args) {
+static mp_obj_t flipperzero_dialog_message_set_header(size_t n_args, const mp_obj_t* args) {
     if(n_args < 3) {
         return mp_const_none;
     }
