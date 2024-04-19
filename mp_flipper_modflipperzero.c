@@ -331,9 +331,9 @@ static mp_obj_t flipperzero_dialog_message_set_button(mp_obj_t text_obj, mp_obj_
 static MP_DEFINE_CONST_FUN_OBJ_2(flipperzero_dialog_message_set_button_obj, flipperzero_dialog_message_set_button);
 
 static mp_obj_t flipperzero_dialog_message_show() {
-    mp_flipper_dialog_message_show();
+    mp_int_t button = mp_flipper_dialog_message_show();
 
-    return mp_const_none;
+    return mp_obj_new_int(button);
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(flipperzero_dialog_message_show_obj, flipperzero_dialog_message_show);
 
