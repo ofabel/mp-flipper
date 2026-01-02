@@ -16,6 +16,14 @@ This FAP version requires about 80 kB from SRAM to start (needed for the Python 
 Due to memory fragmentation it's possible, that the application crashes when you start it.
 If this happens, just try again (the crash doesn't harm your device).
 
+> [!IMPORTANT]
+> This problem is already addressed to the firmware developers in [this issue](https://github.com/flipperdevices/flipperzero-firmware/issues/3927).
+> Nevertheless, running the uPython application from the SD card is still a heavy task for the Flipper.
+
+_I'm thinking about publishing a fork of the original firmware with uPython bundled as a core service._
+_This would mitigate all the memory problems._
+_The SD card version would still be there and maintained, but possibly with a limited set of features._
+
 ## Development
 
 This section is only relevant, if you want to build the FAP on your own.

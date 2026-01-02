@@ -5,16 +5,17 @@ Here you can see what to expect from future releases.
 
 ## Next Release
 
-* Improved `print` function.
-* UART
+* SPI
 * I2C
 * Maybe USB HID
+
+_The next release might takes the form of a fork of the official firmware._
+_Check out [this issue](https://github.com/ofabel/mp-flipper/issues/4) for details._
 
 ## Planned
 
 * I2C
 * NFC
-* UART
 * USB HID
 * Subghz
 * Bluetooth

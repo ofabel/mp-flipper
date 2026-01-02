@@ -79,10 +79,6 @@ Action upython_splash_screen() {
     FuriPubSub* input_event_queue = furi_record_open(RECORD_INPUT_EVENTS);
     FuriPubSubSubscription* input_event = furi_pubsub_subscribe(input_event_queue, on_input, NULL);
 
-    ViewPort* view_port = view_port_alloc();
-
-    gui_add_view_port(gui, view_port, GuiLayerFullscreen);
-
     Canvas* canvas = gui_direct_draw_acquire(gui);
 
     canvas_draw_icon(canvas, 0, 0, &I_splash);
@@ -110,9 +106,6 @@ Action upython_splash_screen() {
     furi_pubsub_unsubscribe(input_event_queue, input_event);
 
     gui_direct_draw_release(gui);
-    gui_remove_view_port(gui, view_port);
-
-    view_port_free(view_port);
 
     furi_record_close(RECORD_INPUT_EVENTS);
     furi_record_close(RECORD_GUI);

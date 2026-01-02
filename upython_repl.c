@@ -13,6 +13,21 @@
 #define AUTOCOMPLETE_MANY_MATCHES (size_t)(-1)
 #define HISTORY_SIZE              16
 
+typedef enum {
+    CliSymbolAsciiSOH = 0x01,
+    CliSymbolAsciiETX = 0x03,
+    CliSymbolAsciiEOT = 0x04,
+    CliSymbolAsciiBell = 0x07,
+    CliSymbolAsciiBackspace = 0x08,
+    CliSymbolAsciiTab = 0x09,
+    CliSymbolAsciiLF = 0x0A,
+    CliSymbolAsciiCR = 0x0D,
+    CliSymbolAsciiEsc = 0x1B,
+    CliSymbolAsciiUS = 0x1F,
+    CliSymbolAsciiSpace = 0x20,
+    CliSymbolAsciiDel = 0x7F,
+} CliSymbols;
+
 typedef struct {
     FuriString** stack;
     size_t pointer;
@@ -245,7 +260,7 @@ inline static bool continue_with_input(mp_flipper_repl_context_t* context) {
     return true;
 }
 
-void upython_repl_execute(Cli* cli) {
+void upython_repl_execute() {
     size_t stack;
 
     const size_t heap_size = memmgr_get_free_heap() * 0.1;
@@ -267,7 +282,6 @@ void upython_repl_execute(Cli* cli) {
     uint8_t* buffer = malloc(sizeof(uint8_t));
 
     bool exit = false;
-    bool wait_for_lf = false;
 
     // REPL loop
     do {
@@ -285,7 +299,7 @@ void upython_repl_execute(Cli* cli) {
 
             // scan character loop
             do {
-                character = cli_getc(cli);
+                character = getc(stdin);
 
                 // Ctrl + C
                 if(character == CliSymbolAsciiETX) {
@@ -306,33 +320,26 @@ void upython_repl_execute(Cli* cli) {
                     break;
                 }
 
-                // wait for line feed character
+                // skip line feed
+                if(character == CliSymbolAsciiLF) {
+                    continue;
+                }
+
+                // handle carriage return
                 if(character == CliSymbolAsciiCR) {
-                    wait_for_lf = true;
-
-                    continue;
-                }
-
-                // skip if we don't wait for line feed
-                if(!wait_for_lf && character == CliSymbolAsciiLF) {
-                    continue;
-                }
-
-                // handle line feed
-                if(wait_for_lf && character == CliSymbolAsciiLF) {
                     furi_string_push_back(context->code, '\n');
                     furi_string_cat(context->code, context->line);
                     furi_string_trim(context->code);
 
-                    cli_nl(cli);
+                    printf("\r\n");
 
                     break;
                 }
 
                 // handle arrow keys
                 if(character >= 0x18 && character <= 0x1B) {
-                    character = cli_getc(cli);
-                    character = cli_getc(cli);
+                    character = getc(stdin);
+                    character = getc(stdin);
 
                     handle_arrow_keys(character, context);
 
@@ -356,7 +363,8 @@ void upython_repl_execute(Cli* cli) {
                 // append at end
                 if(context->cursor == furi_string_size(context->line)) {
                     buffer[0] = character;
-                    cli_write(cli, (const uint8_t*)buffer, 1);
+                    putc(buffer[0], stdout);
+                    fflush(stdout);
 
                     furi_string_push_back(context->line, character);
 
